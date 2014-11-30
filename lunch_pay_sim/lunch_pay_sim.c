@@ -2,41 +2,34 @@
 // lunch_pay_sim.c
 
 #include <stdio.h>
+#include <string.h>
+#include "pNode.h"
+#include "pNodeFunc.h"
 
 int main(int argc, char** argv)
 {
-	// initializations
-	// todo: contain info in struct and pass struct around?
-	unsigned char num_participants = 6;
-	unsigned char num_lunches = 30;
-	unsigned char i;
+	unsigned int num_choice;
 
-	// declarations
-	// todo: List node?
-	unsigned char points[num_participants];
-	unsigned char money_paid[num_participants];
-
-	// initialize arrays (todo: FUNCTION)
-	// common key = user ID
-	for(i = 0; i < num_participants; i++)
+	while(1)
 	{
-		points[i] = 0;
-		money_paid[i] = 0;
-	}
+		printf("Enter\n");
+		printf("1 to add participant\n");
+		printf("2 to end\n");
+		scanf("%d", &num_choice);
 
-	// cycle through lunches and fill up array (todo: FUNCTION)
-	for(i = 0; i < num_lunches; i++)
-	{
-		printf("%d\n", i);
+		if(num_choice == 1)
+		{
+			printf("Add next participant here\n");
+		}
+		else if(num_choice == 2)
+		{
+			printf("Exiting\n");
+			break;
+		}
+		else
+		{
+			printf("Unknown option. Try again.\n");
+		}
 	}
-
-	// print final information per participant, including (todo: FUNCTION)
-	// 1) Dollar amount spent
-	// 2) Number of lunches paid 
-	for(i = 0; i < num_participants; i++)
-	{
-		printf("person %d paid %d and has %d points\n", i, money_paid[i], points[i]);
-	}
-
 	return 0; // exit
 }
