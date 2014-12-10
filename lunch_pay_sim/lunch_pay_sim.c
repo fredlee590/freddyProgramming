@@ -9,21 +9,29 @@
 int main(int argc, char** argv)
 {
 	unsigned int num_choice;
-
+	PNODE* parList = NULL;
 	while(1)
 	{
 		printf("Enter\n");
-		printf("1 to add participant\n");
-		printf("2 to end\n");
+		printf("    1 to add participant\n");
+		printf("    2 to print\n");
+		printf("    3 to end\n\n");
 		scanf("%d", &num_choice);
 
 		if(num_choice == 1)
 		{
+			char newName[256] = "";
 			printf("Add next participant here\n");
+			scanf("%s", newName);
+			parList = addParticipant(parList, newName);
 		}
 		else if(num_choice == 2)
 		{
 			printf("Exiting\n");
+			printList(parList);
+		}
+		else if(num_choice == 3)
+		{
 			break;
 		}
 		else

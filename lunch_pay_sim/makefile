@@ -6,3 +6,4 @@ pNodeFunc.o : pNodeFunc.c pNode.h
 	gcc -Wall -g -c pNodeFunc.c
 clean:
 	rm -f *.o
+	rm -f lunch_pay_sim
