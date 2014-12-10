@@ -14,8 +14,8 @@ int main(int argc, char** argv)
 	{
 		printf("Enter\n");
 		printf("    1 to add participant\n");
-		printf("    2 to print\n");
-		printf("    3 to end\n\n");
+		printf("    2 to print participants\n");
+		printf("    3 to run simulation\n\n");
 		scanf("%d", &num_choice);
 
 		if(num_choice == 1)
