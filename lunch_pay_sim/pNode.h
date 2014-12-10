@@ -4,7 +4,7 @@
 
 typedef struct pNode
 {
-	char* name;
+	char name[256];
 	unsigned char num_lunches;
 	char points;
 	double spent;

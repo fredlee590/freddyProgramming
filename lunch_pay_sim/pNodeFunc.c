@@ -4,11 +4,13 @@
 
 #include <stdlib.h>
 #include <stdio.h> // maybe remove this after testing
+#include <string.h>
 #include "pNode.h"
 
 void initParticipant(PNODE* parNodePtr, char* parName)
 {
-	(*parNodePtr).name = parName;
+	strcpy((*parNodePtr).name, parName);
+	//(*parNodePtr).name = parName;
 	(*parNodePtr).num_lunches = 0;
 	(*parNodePtr).points = 0;
 	(*parNodePtr).spent = 0.0;
