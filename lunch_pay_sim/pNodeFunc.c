@@ -49,6 +49,21 @@ PNODE* addParticipant(PNODE* head, char* parName)
 	return head;
 }
 
+PNODE* join_lists(PNODE* head1, PNODE* head2)
+{
+	// get to end of first list
+	PNODE* current = head1;
+
+	while((*current).next != NULL)
+	{
+		current = (*current).next;
+	}
+
+	(*current).next = head2;
+
+	return head1;
+}
+
 void printList(PNODE* head)
 {
 	if ( head == NULL )
