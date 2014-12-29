@@ -3,6 +3,7 @@
 
 void initParticipant(PNODE* parNodePtr, char* parName);
 PNODE* addParticipant(PNODE* parNodePtr, char* parName);
+unsigned char get_length(PNODE* parNodePtr);
 void printList(PNODE* parNodePtr);
 
 #endif

@@ -1,10 +1,11 @@
 // Frederick Lee
-// lunch_pay_sim.c
+// main.c
 
 #include <stdio.h>
 #include <string.h>
 #include "pNode.h"
 #include "pNodeFunc.h"
+#include "lunchSimFunc.h"
 
 int main(int argc, char** argv)
 {
@@ -32,6 +33,7 @@ int main(int argc, char** argv)
 		}
 		else if(num_choice == 3)
 		{
+			run_simulation(parList, 100);
 			break;
 		}
 		else

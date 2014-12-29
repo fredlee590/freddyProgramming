@@ -43,10 +43,30 @@ PNODE* addParticipant(PNODE* head, char* parName)
 		printf("    tail: %s\n", (*current).name);
 		printf("    tail ptr: %p\n", current);
 		PNODE *newPNODE = malloc(sizeof(PNODE));
-		initParticipant(newPNODE, parName);
+		initParticipant(newPNODE, parName); // todo: move this out to another function for list
 		(*current).next = newPNODE;
 	}
 	return head;
+}
+
+unsigned char get_length(PNODE* head)
+{
+	if(head == NULL)
+	{
+		return 0;
+	}
+	else
+	{
+		unsigned char count = 0;
+		// traverse list and count
+		PNODE* current = head;
+		while(current != NULL)
+		{
+			count++;
+			current = (*current).next;
+		}
+		return count;
+	}
 }
 
 PNODE* join_lists(PNODE* head1, PNODE* head2)
