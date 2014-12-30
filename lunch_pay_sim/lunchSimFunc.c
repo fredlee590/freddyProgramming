@@ -2,8 +2,8 @@
 // Define simulation support functions here
 // Frederick Lee
 
-//#include <stdlib.h> // random
-//#include <time.h> // time to use for seed random
+#include <stdlib.h> // random
+#include <time.h> // time to use for seed random
 #include <stdio.h> // printing
 #include "pNode.h" // primary data structure
 #include "pNodeFunc.h" // pNode functions
@@ -26,17 +26,26 @@ void run_simulation(PNODE* head, unsigned char N)
 	printf("=============================\n");
 	printf("Run simulation. All logic goes here\n");
 
+	srand(time(NULL)); // reseed random numbers based on time of run
+
 	printf("\n");
 	printf("For each of the %d lunches...\n", N);
 	for(i = 1; i <= N; i++)
 	{
-		//unsigned char num_lunchers;
-
+		unsigned char j;
 		printf("----- Lunch %d -----\n", i);
 
 		printf("\tGenerate random number A of lunchers for this lunch\n");
+		unsigned char num_lunchers = (rand() % (max_num_lunchers - 1)) + 2; // at least two, max max_num_lunchers
+		printf("\tNum lunchers for this lunch = %d\n", num_lunchers);
 
 		printf("\tGenerate A random numbers to select A lunchers to add to luncher list\n");
+		for(j = 0; j < num_lunchers; j++)
+		{
+			// pull one luncher from main list to current lunch's lunchers
+			printf("\tLuncher #%d\n", j);
+		}
+
 		printf("\tFor each of the A lunchers selected for this lunch\n");
 		printf("\t\tGenerate random modifier X to add to base lunch price\n");
 		printf("\t\tAdd 10 + X to lunch sum S\n");
