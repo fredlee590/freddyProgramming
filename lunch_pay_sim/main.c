@@ -33,7 +33,7 @@ int main(int argc, char** argv)
 		}
 		else if(num_choice == 3)
 		{
-			run_simulation(parList, 100);
+			run_simulation(parList, 5); // 5 lunches for test / development
 			break;
 		}
 		else
