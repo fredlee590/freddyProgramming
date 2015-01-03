@@ -60,6 +60,9 @@ void run_simulation(PNODE* head, unsigned char N)
 			printf("LUNCHERS\n");
 			printList(linked_lists[1]);
 			#endif
+
+			head = linked_lists[0];
+			lunchers = linked_lists[1];
 		}
 
 		printf("\tFor each of the A lunchers selected for this lunch\n");
@@ -70,6 +73,7 @@ void run_simulation(PNODE* head, unsigned char N)
 		printf("\tDetermine luncher with fewest points to designate as payer\n");
 		printf("\tUpdate points : Subtract 1 point from all non-payer players : Add A - 1 points to payer\n");
 		printf("\tAdd lunch sum S to payer's paid field\n");
+		head = join_lists(head, lunchers);
 	}
 
 	printf("Print out final numbers for all possible lunchers\n");

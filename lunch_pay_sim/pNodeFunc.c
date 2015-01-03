@@ -77,17 +77,24 @@ unsigned char get_length(PNODE* head)
 
 PNODE* join_lists(PNODE* head1, PNODE* head2)
 {
-	// get to end of first list
-	PNODE* current = head1;
-
-	while(current->next != NULL)
+	if(head1 == NULL)
 	{
-		current = current->next;
+		return head2;
 	}
+	else
+	{
+		// get to end of first list
+		PNODE* current = head1;
 
-	current->next = head2;
+		while(current->next != NULL)
+		{
+			current = current->next;
+		}
 
-	return head1;
+		current->next = head2;
+
+		return head1;
+	}
 }
 
 void printList(PNODE* head)
@@ -120,7 +127,49 @@ PNODE** transfer_node(unsigned char index, PNODE* from, PNODE* to)
 	printf("to = %p\n", to);
 	#endif
 
-	// transfer actually occurs here
+	// ----- transfer actually occurs here -----
+	PNODE* target;
+
+	// if index == 0, index'th node is first and need to change from and to pointers.
+	// if index > 0, need to hunt for index'th node.
+	if(index == 0)
+	{
+		target = from;
+		from = from->next;
+	}
+	else
+	{
+		unsigned char i;
+		PNODE* prev = from;
+		target = from->next;
+		for(i = 1; i < index; i++)
+		{
+			prev = prev->next;
+			target = target->next;
+		}
+		prev->next = target->next;
+	}
+
+	#ifdef DEBUG
+	printf("target name = %s\n", target->name);
+	#endif
+
+	// update to list
+	if(to == NULL)
+	{
+		to = target;
+	}
+	else
+	{
+		PNODE* cur = to;
+		while(cur->next != NULL)
+		{
+			cur = cur->next;
+		}
+		cur->next = target;
+	}
+
+	target->next = NULL;
 
 	results[0] = from;
 	results[1] = to;
