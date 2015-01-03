@@ -8,6 +8,9 @@
 #include "pNode.h" // primary data structure
 #include "pNodeFunc.h" // pNode functions
 
+#define BASE_PRICE 10.0
+#define PRICE_RANGE 500
+
 void run_simulation(PNODE* head, unsigned char N)
 {
 	unsigned char i;
@@ -35,6 +38,7 @@ void run_simulation(PNODE* head, unsigned char N)
 	printf("For each of the %d lunches...\n", N);
 	for(i = 1; i <= N; i++)
 	{
+		double lunchSum = 0.0;
 		unsigned char j;
 		printf("----- Lunch %d -----\n", i);
 
@@ -69,14 +73,21 @@ void run_simulation(PNODE* head, unsigned char N)
 		PNODE* cur_luncher = lunchers;
 		while(cur_luncher != NULL)
 		{
+			printf("\t\tGenerate random modifier X to add to base lunch price\n");
+			double lunchPrice = ((rand() % PRICE_RANGE) / 100.0) + BASE_PRICE;
+
+			printf("\t\tTODO: Add 10 + X to personal tally under bought\n");
+			cur_luncher->bought += lunchPrice;
+
+			printf("\t\tAdd 10 + X to lunch sum S\n");
+			lunchSum += lunchPrice;
+
+			printf("\t\tIncrement personal tally under num_lunches\n");
 			cur_luncher->num_lunches++;
+
 			cur_luncher = cur_luncher->next;
 		}
 
-		printf("\t\tGenerate random modifier X to add to base lunch price\n");
-		printf("\t\tAdd 10 + X to lunch sum S\n");
-		printf("\t\tTODO: Add 10 + X to personal tally under bought\n");
-		printf("\t\tIncrement personal tally under num_lunches\n");
 		printf("\tDetermine luncher with fewest points to designate as payer\n");
 		printf("\tUpdate points : Subtract 1 point from all non-payer players : Add A - 1 points to payer\n");
 		printf("\tAdd lunch sum S to payer's paid field\n");
