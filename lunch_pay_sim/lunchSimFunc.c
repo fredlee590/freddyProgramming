@@ -54,18 +54,25 @@ void run_simulation(PNODE* head, unsigned char N)
 			unsigned char k = rand() % cur_size;
 			linked_lists = transfer_node(k, head, lunchers);
 
-			#ifdef DEBUG
-			printf("HEAD\n");
-			printList(linked_lists[0]);
-			printf("LUNCHERS\n");
-			printList(linked_lists[1]);
-			#endif
-
 			head = linked_lists[0];
 			lunchers = linked_lists[1];
 		}
 
+		#ifdef DEBUG
+		printf("HEAD\n");
+		printList(head);
+		printf("LUNCHERS\n");
+		printList(lunchers);
+		#endif
+
 		printf("\tFor each of the A lunchers selected for this lunch\n");
+		PNODE* cur_luncher = lunchers;
+		while(cur_luncher != NULL)
+		{
+			cur_luncher->num_lunches++;
+			cur_luncher = cur_luncher->next;
+		}
+
 		printf("\t\tGenerate random modifier X to add to base lunch price\n");
 		printf("\t\tAdd 10 + X to lunch sum S\n");
 		printf("\t\tTODO: Add 10 + X to personal tally under bought\n");

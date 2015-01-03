@@ -122,9 +122,9 @@ PNODE** transfer_node(unsigned char index, PNODE* from, PNODE* to)
 {
 	PNODE** results = malloc(sizeof(PNODE*));
 	#ifdef DEBUG
-	printf("index = %d\n", index);
-	printf("from = %p\n", from);
-	printf("to = %p\n", to);
+	printf("\t\tindex = %d\n", index);
+	printf("\t\tfrom = %p\n", from);
+	printf("\t\tto = %p\n", to);
 	#endif
 
 	// ----- transfer actually occurs here -----
@@ -151,7 +151,7 @@ PNODE** transfer_node(unsigned char index, PNODE* from, PNODE* to)
 	}
 
 	#ifdef DEBUG
-	printf("target name = %s\n", target->name);
+	printf("\t\ttarget name = %s\n", target->name);
 	#endif
 
 	// update to list
