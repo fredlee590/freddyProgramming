@@ -114,9 +114,13 @@ void printList(PNODE* head)
 PNODE** transfer_node(unsigned char index, PNODE* from, PNODE* to)
 {
 	PNODE** results = malloc(sizeof(PNODE*));
+	#ifdef DEBUG
 	printf("index = %d\n", index);
 	printf("from = %p\n", from);
 	printf("to = %p\n", to);
+	#endif
+
+	// transfer actually occurs here
 
 	results[0] = from;
 	results[1] = to;
