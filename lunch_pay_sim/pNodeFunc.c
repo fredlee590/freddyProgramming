@@ -12,6 +12,7 @@ PNODE* addParticipant(PNODE* head, char* parName);
 unsigned char get_length(PNODE* head);
 PNODE* join_lists(PNODE* head1, PNODE* head2);
 void printList(PNODE* head);
+PNODE** transfer_node(unsigned char index, PNODE* from, PNODE* to);
 
 void initParticipant(PNODE* parNodePtr, char* parName)
 {
@@ -108,4 +109,17 @@ void printList(PNODE* head)
 			current = current->next;
 		}
 	}
+}
+
+PNODE** transfer_node(unsigned char index, PNODE* from, PNODE* to)
+{
+	PNODE** results = malloc(sizeof(PNODE*));
+	printf("index = %d\n", index);
+	printf("from = %p\n", from);
+	printf("to = %p\n", to);
+
+	results[0] = from;
+	results[1] = to;
+
+	return results;
 }

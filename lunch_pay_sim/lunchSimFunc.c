@@ -11,6 +11,9 @@
 void run_simulation(PNODE* head, unsigned char N)
 {
 	unsigned char i;
+	PNODE** linked_lists = malloc(sizeof(PNODE*));
+	linked_lists[0] = head;
+
 	if(N < 2)
 	{
 		printf("Need at least 2 lunches for a meaningful simulation\n");
@@ -39,11 +42,24 @@ void run_simulation(PNODE* head, unsigned char N)
 		unsigned char num_lunchers = (rand() % (max_num_lunchers - 1)) + 2; // at least two, max max_num_lunchers
 		printf("\tNum lunchers for this lunch = %d\n", num_lunchers);
 
+		PNODE* lunchers = NULL;
+		linked_lists[1] = lunchers;
+
 		printf("\tGenerate A random numbers to select A lunchers to add to luncher list\n");
 		for(j = 0; j < num_lunchers; j++)
 		{
 			// pull one luncher from main list to current lunch's lunchers
 			printf("\tLuncher #%d\n", j);
+			unsigned char cur_size = max_num_lunchers - j;
+			unsigned char k = rand() % cur_size;
+			linked_lists = transfer_node(k, head, lunchers);
+
+			#ifdef DEBUG
+			printf("HEAD\n");
+			printList(linked_lists[0]);
+			printf("LUNCHERS\n");
+			printList(linked_lists[1]);
+			#endif
 		}
 
 		printf("\tFor each of the A lunchers selected for this lunch\n");
