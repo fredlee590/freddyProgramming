@@ -7,6 +7,12 @@
 #include <string.h>
 #include "pNode.h"
 
+void initParticipant(PNODE* parNodePtr, char* parName);
+PNODE* addParticipant(PNODE* head, char* parName);
+unsigned char get_length(PNODE* head);
+PNODE* join_lists(PNODE* head1, PNODE* head2);
+void printList(PNODE* head);
+
 void initParticipant(PNODE* parNodePtr, char* parName)
 {
 	strcpy(parNodePtr->name, parName);
