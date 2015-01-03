@@ -19,7 +19,8 @@ void initParticipant(PNODE* parNodePtr, char* parName)
 	strcpy(parNodePtr->name, parName);
 	parNodePtr->num_lunches = 0;
 	parNodePtr->points = 0;
-	parNodePtr->spent = 0.0;
+	parNodePtr->bought = 0.0;
+	parNodePtr->paid = 0.0;
 	parNodePtr->next = NULL;
 }
 
@@ -112,7 +113,8 @@ void printList(PNODE* head)
 			printf("    Participant: %s\n", current->name);
 			printf("    num_lunches: %d\n", current->num_lunches);
 			printf("    points: %d\n", current->points);
-			printf("    spent: %.2f\n", current->spent);
+			printf("    bought: %.2f\n", current->bought);
+			printf("    paid: %.2f\n", current->paid);
 			current = current->next;
 		}
 	}

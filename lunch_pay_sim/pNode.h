@@ -7,6 +7,7 @@ typedef struct pNode
 	char name[256];
 	unsigned char num_lunches;
 	char points;
-	double spent;
+	double bought;
+	double paid;
 	struct pNode* next;
 } PNODE;
