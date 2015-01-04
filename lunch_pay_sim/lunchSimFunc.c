@@ -99,7 +99,7 @@ void run_simulation(PNODE* head, unsigned char N)
 		lunchers = updatePoints(lunchers, payer->name, num_lunchers);
 
 		printf("\tAdd lunch sum S to payer's paid field\n");
-		// payer->spent += lunchSum;
+		payer->paid += lunchSum;
 
 		printf("\tRecombine lunchers to master list to prepare for next lunch\n");
 		head = join_lists(head, lunchers);
