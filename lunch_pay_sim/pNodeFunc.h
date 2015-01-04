@@ -7,5 +7,7 @@ PNODE* join_lists(PNODE* head1, PNODE* head2);
 unsigned char get_length(PNODE* parNodePtr);
 void printList(PNODE* parNodePtr);
 PNODE** transfer_node(unsigned char index, PNODE* from, PNODE* to);
+PNODE* findPayer(PNODE* head);
+PNODE* updatePoints(PNODE* head, char* payerName, unsigned char num_lunchers);
 
 #endif

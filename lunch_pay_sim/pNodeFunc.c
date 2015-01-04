@@ -178,3 +178,45 @@ PNODE** transfer_node(unsigned char index, PNODE* from, PNODE* to)
 
 	return results;
 }
+
+char* findPayer(PNODE* head)
+{
+	PNODE* cur = head;
+	char min_points = 127;
+	char* result = "";
+
+	while(cur != NULL)
+	{
+		char cur_points = cur->points;
+		if(cur_points < min_points)
+		{
+			min_points = cur_points;
+			result = cur->name;
+		}
+		cur = cur->next;
+	}
+
+	#ifdef DEBUG
+	printf("min_points = %d\n", min_points);
+	#endif
+
+	return result;
+}
+
+PNODE* updatePoints(PNODE* head, char* payerName, unsigned char num_lunchers)
+{
+	PNODE* cur = head;
+	while(cur != NULL)
+	{
+		if(strcmp(cur->name, payerName) == 0)
+		{
+			cur->points += num_lunchers - 1;
+		}
+		else
+		{
+			cur->points--;
+		}
+		cur = cur->next;
+	}
+	return head;
+}

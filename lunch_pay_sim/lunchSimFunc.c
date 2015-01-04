@@ -89,8 +89,19 @@ void run_simulation(PNODE* head, unsigned char N)
 		}
 
 		printf("\tDetermine luncher with fewest points to designate as payer\n");
+		PNODE* payer = findPayer(lunchers);
+
+		#ifdef DEBUG
+		printf("payer = %s\n", payer->name);
+		#endif
+
 		printf("\tUpdate points : Subtract 1 point from all non-payer players : Add A - 1 points to payer\n");
+		lunchers = updatePoints(lunchers, payer->name, num_lunchers);
+
 		printf("\tAdd lunch sum S to payer's paid field\n");
+		// payer->spent += lunchSum;
+
+		printf("\tRecombine lunchers to master list to prepare for next lunch\n");
 		head = join_lists(head, lunchers);
 	}
 
