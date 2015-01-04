@@ -109,12 +109,15 @@ void printList(PNODE* head)
 		PNODE* current = head;
 		while(current != NULL)
 		{
-			printf("Addr: %p\n", current);
-			printf("    Participant: %s\n", current->name);
-			printf("    num_lunches: %d\n", current->num_lunches);
-			printf("    points: %d\n", current->points);
-			printf("    bought: %.2f\n", current->bought);
-			printf("    paid: %.2f\n", current->paid);
+			printf("Participant: %s\n", current->name);
+			#ifdef DEBUG
+			printf("\tAddr: %p\n", current);
+			#endif
+			printf("\tnum_lunches: %d\n", current->num_lunches);
+			printf("\tpoints: %d\n", current->points);
+			printf("\tbought: %.2f\n", current->bought);
+			printf("\tpaid: %.2f\n", current->paid);
+			printf("\treturn: %.2f%%\n", (current->paid / current->bought) * 100.0);
 			current = current->next;
 		}
 	}
