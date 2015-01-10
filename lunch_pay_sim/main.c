@@ -11,6 +11,15 @@ int main(int argc, char** argv)
 {
 	unsigned int num_choice;
 	PNODE* parList = NULL;
+
+	/*
+	todo: use getopt to include options. at least the following:
+	1) number of lunches
+	2) output to csv file with <input file name>.csv
+		lunch_num,name,points,bought,paid,ratio,payer_y_n
+	3) offset for initial head
+	*/
+
 	while(1)
 	{
 		printf("Enter\n");
@@ -33,7 +42,10 @@ int main(int argc, char** argv)
 		}
 		else if(num_choice == 3)
 		{
+			#ifdef DEBUG
 			run_simulation(parList, 5); // 5 lunches for test / development
+			#endif
+			run_simulation(parList, 200); // 200 lunches for production
 			break;
 		}
 		else
