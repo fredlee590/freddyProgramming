@@ -13,6 +13,7 @@ unsigned char get_length(PNODE* head);
 PNODE* join_lists(PNODE* head1, PNODE* head2);
 void printList(PNODE* head);
 PNODE** transfer_node(unsigned char index, PNODE* from, PNODE* to);
+void free_all(PNODE* head);
 
 void initParticipant(PNODE* parNodePtr, char* parName)
 {
@@ -222,4 +223,16 @@ PNODE* updatePoints(PNODE* head, char* payerName, unsigned char num_lunchers)
 		cur = cur->next;
 	}
 	return head;
+}
+
+void free_all(PNODE* head)
+{
+	if(head->next == NULL)
+	{
+		free(head);
+	}
+	else
+	{
+		free_all(head->next);
+	}
 }
