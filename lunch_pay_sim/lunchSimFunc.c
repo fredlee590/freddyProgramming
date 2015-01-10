@@ -137,4 +137,5 @@ void run_simulation(PNODE* head, unsigned char N)
 
 	printf("\n===== FINAL TALLY =====\n\n");
 	printList(head);
+	free_all(head);
 }
