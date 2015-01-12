@@ -2,7 +2,9 @@
 // main.c
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+#include <getopt.h>
 #include "pNode.h"
 #include "pNodeFunc.h"
 #include "lunchSimFunc.h"
@@ -10,7 +12,13 @@
 int main(int argc, char** argv)
 {
 	unsigned int num_choice;
+	int opt;
 	PNODE* parList = NULL;
+	int option_index = 0;
+
+	unsigned char num_lunches = 5;
+	char output_file[256] = ""; // todo: make this more robust
+	double offset = 0.00;
 
 	/*
 	todo: use getopt to include options. at least the following:
@@ -19,6 +27,51 @@ int main(int argc, char** argv)
 		lunch_num,name,points,bought,paid,ratio,payer_y_n
 	3) offset for initial head
 	*/
+
+	static struct option long_options[] = {
+		{"lunches",	required_argument,	0,	0 },
+		{"output",	required_argument,	0,	0 },
+		{"bigbuyer",	required_argument,	0,	0 },
+		{"help",	no_argument,		0,	0 },
+		{0,		0,			0,	0 }
+	};
+
+	while((opt = getopt_long(argc, argv, "l:o:b:h", long_options, &option_index)) != -1)
+	{
+		switch(opt)
+		{
+			case 'l':
+				if(optarg)
+				{
+					num_lunches = atoi(optarg);
+				}
+				printf("option l - %d\n", num_lunches);
+				break;
+			case 'o':
+				if(optarg)
+				{
+					strcpy(output_file, optarg);
+				}
+				printf("option o - %s\n", output_file);
+				break;
+			case 'b':
+				if(optarg)
+				{
+					offset = atof(optarg);
+				}
+				printf("option b - %.2f\n", offset);
+				break;
+			case 'h':
+				printf("option h\n");
+				break;
+			case '?':
+				printf("option ?\n");
+				break;
+			default:
+				printf("unknown option\n");
+				break;
+		}
+	}
 
 	while(1)
 	{
@@ -42,10 +95,7 @@ int main(int argc, char** argv)
 		}
 		else if(num_choice == 3)
 		{
-			#ifdef DEBUG
-			run_simulation(parList, 5); // 5 lunches for test / development
-			#endif
-			run_simulation(parList, 200); // 200 lunches for production
+			run_simulation(parList, num_lunches); // 5 lunches for test / development
 			break;
 		}
 		else
