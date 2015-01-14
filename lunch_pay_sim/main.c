@@ -29,11 +29,11 @@ int main(int argc, char** argv)
 	*/
 
 	static struct option long_options[] = {
-		{"lunches",	required_argument,	0,	0 },
-		{"output",	required_argument,	0,	0 },
-		{"bigbuyer",	required_argument,	0,	0 },
-		{"help",	no_argument,		0,	0 },
-		{0,		0,			0,	0 }
+		{"lunches",	required_argument,	0,	'l'	},
+		{"output",	required_argument,	0,	'o'	},
+		{"bigbuyer",	required_argument,	0,	'b'	},
+		{"help",	no_argument,		0,	'h'	},
+		{0,		0,			0,	0	}
 	};
 
 	while((opt = getopt_long(argc, argv, "l:o:b:h", long_options, &option_index)) != -1)
@@ -62,13 +62,13 @@ int main(int argc, char** argv)
 				printf("option b - %.2f\n", offset);
 				break;
 			case 'h':
-				printf("option h\n");
+				printHelp();
 				break;
 			case '?':
 				printf("option ?\n");
 				break;
 			default:
-				printf("unknown option\n");
+				printf("unknown option - %d\n", opt);
 				break;
 		}
 	}
