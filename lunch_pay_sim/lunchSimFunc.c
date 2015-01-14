@@ -11,6 +11,18 @@
 #define BASE_PRICE 10.0
 #define PRICE_RANGE 500
 
+void printHelp()
+{
+	printf("lunch_pay_sim [options]\n");
+	printf("options\n");
+	printf("\t-l, --lunches [number of lunches for this sim]\n");
+	printf("\t-o, --output [name of file to output data in CSV format]\n");
+	printf("\t-b, --bigbuyer [price to add to represent big buyer]\n");
+	printf("\t-h, --help\n");
+
+	return;
+}
+
 void run_simulation(PNODE* head, unsigned char N)
 {
 	unsigned char i;
