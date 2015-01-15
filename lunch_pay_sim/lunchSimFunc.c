@@ -25,6 +25,12 @@ void printHelp()
 
 void run_simulation(PNODE* head, unsigned char N)
 {
+	if(head == NULL) // replace with assert (get some practice there)
+	{
+		printf("No lunch participants!\nUseless simulation!\n");
+		return;
+	}
+
 	unsigned char i;
 	PNODE** linked_lists = malloc(sizeof(PNODE*));
 	linked_lists[0] = head;
