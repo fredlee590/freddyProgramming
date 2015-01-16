@@ -9,5 +9,6 @@ typedef struct pNode
 	char points;
 	double bought;
 	double paid;
+	double offset;
 	struct pNode* next;
 } PNODE;

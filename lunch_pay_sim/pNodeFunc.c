@@ -8,7 +8,7 @@
 #include "pNode.h"
 
 void initParticipant(PNODE* parNodePtr, char* parName);
-PNODE* addParticipant(PNODE* head, char* parName);
+PNODE* addParticipant(PNODE* head, char* parName, double offset);
 unsigned char get_length(PNODE* head);
 PNODE* join_lists(PNODE* head1, PNODE* head2);
 void printList(PNODE* head);
@@ -22,34 +22,42 @@ void initParticipant(PNODE* parNodePtr, char* parName)
 	parNodePtr->points = 0;
 	parNodePtr->bought = 0.0;
 	parNodePtr->paid = 0.0;
+	parNodePtr->offset = 0.0;
 	parNodePtr->next = NULL;
 }
 
-PNODE* addParticipant(PNODE* head, char* parName)
+PNODE* addParticipant(PNODE* head, char* parName, double offset)
 {
 	if ( head == NULL )
 	{
 		printf("    Empty list. Adding first participant\n");
 		head = malloc(sizeof(PNODE));
 		initParticipant(head, parName);
+		head->offset = offset;
 	}
 	else
 	{
 		printf("    Adding participant %s\n", parName);
 
 		// get to the end
+		#ifdef DEBUG
 		printf("    head: %s\n", head->name);
 		printf("    head ptr: %p\n", head);
+		#endif
 		PNODE* current = head;
 		while(current->next != NULL)
 		{
+			#ifdef DEBUG
 			printf("    passing %s\n", current->name);
 			printf("    passing %p\n", current);
+			#endif
 			current = current->next;
 		}
 
+		#ifdef DEBUG
 		printf("    tail: %s\n", current->name);
 		printf("    tail ptr: %p\n", current);
+		#endif
 		PNODE *newPNODE = malloc(sizeof(PNODE));
 		initParticipant(newPNODE, parName); // todo: move this out to another function for list
 		current->next = newPNODE;
@@ -118,7 +126,8 @@ void printList(PNODE* head)
 			printf("\tpoints: %d\n", current->points);
 			printf("\tbought: %.2f\n", current->bought);
 			printf("\tpaid: %.2f\n", current->paid);
-			printf("\treturn: %.2f%%\n", (current->paid / current->bought) * 100.0);
+			printf("\toffset: %.2f\n", current->offset);
+			printf("\tROI: %.2f%%\n", (current->bought / current->paid) * 100.0);
 			current = current->next;
 		}
 	}

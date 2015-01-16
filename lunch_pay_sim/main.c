@@ -63,7 +63,7 @@ int main(int argc, char** argv)
 				break;
 			case 'h':
 				printHelp();
-				break;
+				return 0;
 			case '?':
 				printf("option ?\n");
 				break;
@@ -86,7 +86,7 @@ int main(int argc, char** argv)
 			char newName[256] = "";
 			printf("Add next participant here\n");
 			scanf("%s", newName);
-			parList = addParticipant(parList, newName);
+			parList = addParticipant(parList, newName, offset);
 		}
 		else if(num_choice == 2)
 		{

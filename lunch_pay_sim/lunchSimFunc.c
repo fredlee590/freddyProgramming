@@ -108,7 +108,7 @@ void run_simulation(PNODE* head, unsigned char N)
 			#ifdef DEBUG
 			printf("\t\tGenerate random modifier X to add to base lunch price\n");
 			#endif
-			double lunchPrice = ((rand() % PRICE_RANGE) / 100.0) + BASE_PRICE;
+			double lunchPrice = ((rand() % PRICE_RANGE) / 100.0) + BASE_PRICE + cur_luncher->offset;
 
 			#ifdef DEBUG
 			printf("\t\tTODO: Add 10 + X to personal tally under bought\n");
