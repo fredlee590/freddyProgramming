@@ -25,9 +25,9 @@ void printHelp()
 
 void run_simulation(PNODE* head, unsigned char N)
 {
-	if(head == NULL) // replace with assert (get some practice there)
+	if(head == NULL || head->next == NULL) // replace with assert (get some practice there)
 	{
-		printf("No lunch participants!\nUseless simulation!\n");
+		printf("Not enough lunch participants!\nUseless simulation!\n");
 		return;
 	}
 
