@@ -31,7 +31,7 @@ int main(int argc, char** argv)
 	static struct option long_options[] = {
 		{"lunches",	required_argument,	0,	'l'	},
 		{"output",	required_argument,	0,	'o'	},
-		{"bigbuyer",	required_argument,	0,	'b'	},
+		{"offset",	required_argument,	0,	'f'	},
 		{"help",	no_argument,		0,	'h'	},
 		{0,		0,			0,	0	}
 	};
@@ -45,21 +45,27 @@ int main(int argc, char** argv)
 				{
 					num_lunches = atoi(optarg);
 				}
+				#ifdef DEBUG
 				printf("option l - %d\n", num_lunches);
+				#endif
 				break;
 			case 'o':
 				if(optarg)
 				{
 					strcpy(output_file, optarg);
 				}
+				#ifdef DEBUG
 				printf("option o - %s\n", output_file);
+				#endif
 				break;
-			case 'b':
+			case 'f':
 				if(optarg)
 				{
 					offset = atof(optarg);
 				}
+				#ifdef DEBUG
 				printf("option b - %.2f\n", offset);
+				#endif
 				break;
 			case 'h':
 				printHelp();
@@ -90,7 +96,6 @@ int main(int argc, char** argv)
 		}
 		else if(num_choice == 2)
 		{
-			printf("Exiting\n");
 			printList(parList);
 		}
 		else if(num_choice == 3)
