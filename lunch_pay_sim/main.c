@@ -20,14 +20,6 @@ int main(int argc, char** argv)
 	char output_file[256] = ""; // todo: make this more robust
 	double offset = 0.00;
 
-	/*
-	todo: use getopt to include options. at least the following:
-	1) number of lunches
-	2) output to csv file with <input file name>.csv
-		lunch_num,name,points,bought,paid,ratio,payer_y_n
-	3) offset for initial head
-	*/
-
 	static struct option long_options[] = {
 		{"lunches",	required_argument,	0,	'l'	},
 		{"output",	required_argument,	0,	'o'	},
@@ -36,7 +28,7 @@ int main(int argc, char** argv)
 		{0,		0,			0,	0	}
 	};
 
-	while((opt = getopt_long(argc, argv, "l:o:b:h", long_options, &option_index)) != -1)
+	while((opt = getopt_long(argc, argv, "l:o:f:h", long_options, &option_index)) != -1)
 	{
 		switch(opt)
 		{
