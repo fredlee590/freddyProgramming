@@ -4,8 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <getopt.h>
-
-#define N 256
+#include "sillyEncryptionFunc.h"
 
 void printHelp()
 {
@@ -61,7 +60,9 @@ int main(int argc, char** argv)
 	}
 
 	// algorithm for encryption
+
 	// print out encrypted string
+	printf("%s\n", sillyEncrypt(keyword, "blahblahblah"));
 
 	return 0; // exit
 }
