@@ -9,8 +9,10 @@
 #include "pNodeFunc.h"
 #include "lunchSimFunc.h"
 
+// main function to process options and decide what to do
 int main(int argc, char** argv)
 {
+	// initializations and declarations
 	unsigned int num_choice;
 	int opt;
 	PNODE* parList = NULL;
@@ -20,6 +22,7 @@ int main(int argc, char** argv)
 	char output_file[256] = ""; // todo: make this more robust
 	double offset = 0.00;
 
+	// process options
 	static struct option long_options[] = {
 		{"lunches",	required_argument,	0,	'l'	},
 		{"output",	required_argument,	0,	'o'	},
@@ -71,6 +74,7 @@ int main(int argc, char** argv)
 		}
 	}
 
+	// decide what to do
 	while(1)
 	{
 		printf("Enter\n");
@@ -79,23 +83,24 @@ int main(int argc, char** argv)
 		printf("    3 to run simulation\n\n");
 		scanf("%d", &num_choice);
 
-		if(num_choice == 1)
+		if(num_choice == 1) // add a participant
 		{
 			char newName[256] = "";
 			printf("Add next participant here\n");
 			scanf("%s", newName);
 			parList = addParticipant(parList, newName, offset);
 		}
-		else if(num_choice == 2)
+		else if(num_choice == 2) // check status through printing
 		{
 			printList(parList);
 		}
-		else if(num_choice == 3)
+		else if(num_choice == 3) // run simulation
 		{
-			run_simulation(parList, num_lunches); // 5 lunches for test / development
+			// todo: implement use of output file
+			run_simulation(parList, num_lunches);
 			break;
 		}
-		else
+		else // all other options. throw error.
 		{
 			printf("Unknown option. Try again.\n");
 		}

@@ -11,6 +11,7 @@
 #define BASE_PRICE 10.0
 #define PRICE_RANGE 500
 
+// print help
 void printHelp()
 {
 	printf("lunch_pay_sim [options]\n");
@@ -23,6 +24,10 @@ void printHelp()
 	return;
 }
 
+// actually run simulation
+// todo: decide where to send CSV information. add an input to indicate output type
+// input: pNode function indicating participant list, number of lunches
+// output: none
 void run_simulation(PNODE* head, unsigned char N)
 {
 	if(head == NULL || head->next == NULL) // replace with assert (get some practice there)

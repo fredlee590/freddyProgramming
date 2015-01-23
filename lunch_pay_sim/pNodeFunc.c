@@ -15,6 +15,9 @@ void printList(PNODE* head);
 PNODE** transfer_node(unsigned char index, PNODE* from, PNODE* to);
 void free_all(PNODE* head);
 
+// Initialize participant node. Set pNode to essentially a zero state with name.
+// Input: Participant node, Participant name with which to initialize
+// Output: none
 void initParticipant(PNODE* parNodePtr, char* parName)
 {
 	strcpy(parNodePtr->name, parName);
@@ -26,6 +29,9 @@ void initParticipant(PNODE* parNodePtr, char* parName)
 	parNodePtr->next = NULL;
 }
 
+// Add new participant to participant list
+// Input: Head pNode pointer to indicate list, participant name to initialize, participant price offset
+// Output: Head pNode pointer to indicate list
 PNODE* addParticipant(PNODE* head, char* parName, double offset)
 {
 	if ( head == NULL )
@@ -65,6 +71,10 @@ PNODE* addParticipant(PNODE* head, char* parName, double offset)
 	return head;
 }
 
+// Traverses given list and return tallied length. List must be less than 255 nodes
+// todo: handle this by either exiting, or increasing maximum length
+// Input: Head pNode pointer
+// Output: number indicating how long the node is
 unsigned char get_length(PNODE* head)
 {
 	if(head == NULL)
@@ -85,6 +95,9 @@ unsigned char get_length(PNODE* head)
 	}
 }
 
+// Combine two lists
+// Input: pNode pointer indicating first pNode list, pNode pointer indicating second pNode list
+// Output: pNode pointer of the two combined lists
 PNODE* join_lists(PNODE* head1, PNODE* head2)
 {
 	if(head1 == NULL)
@@ -107,6 +120,10 @@ PNODE* join_lists(PNODE* head1, PNODE* head2)
 	}
 }
 
+// Print important information in list
+// todo: print data in CSV format if --output option is set
+// Input: pNode pointer indicating list to print
+// Output: none
 void printList(PNODE* head)
 {
 	if ( head == NULL )
@@ -133,6 +150,9 @@ void printList(PNODE* head)
 	}
 }
 
+// Move pNode from one list to another. Change references around.
+// Input: Index indicating which node to move, pNode pointer indicating source list, pNode pointer indicating destination list
+// Output: Array of pNode pointers indicating both pNode pointers
 PNODE** transfer_node(unsigned char index, PNODE* from, PNODE* to)
 {
 	PNODE** results = malloc(sizeof(PNODE*));
@@ -192,6 +212,9 @@ PNODE** transfer_node(unsigned char index, PNODE* from, PNODE* to)
 	return results;
 }
 
+// Choose a payer from a given list
+// Input: pNode pointer indicating list to search
+// Output: Name of payer
 char* findPayer(PNODE* head)
 {
 	PNODE* cur = head;
@@ -216,6 +239,9 @@ char* findPayer(PNODE* head)
 	return result;
 }
 
+// Update points based on specified payer and number of people on the lunch
+// Input: pNode pointer indicating list, payer name, number of lunchers for points
+// Output: pNode pointer indicating list
 PNODE* updatePoints(PNODE* head, char* payerName, unsigned char num_lunchers)
 {
 	PNODE* cur = head;
@@ -234,6 +260,9 @@ PNODE* updatePoints(PNODE* head, char* payerName, unsigned char num_lunchers)
 	return head;
 }
 
+// Free all nodes at the end of the sim
+// Input: pNode pointer indicating list of participants
+// Output: none
 void free_all(PNODE* head)
 {
 	if(head->next == NULL)
