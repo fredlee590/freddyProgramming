@@ -28,7 +28,7 @@ void printHelp()
 // todo: decide where to send CSV information. add an input to indicate output type
 // input: pNode function indicating participant list, number of lunches
 // output: none
-void run_simulation(PNODE* head, unsigned char N)
+void run_simulation(PNODE* head, unsigned char N, char* output_file)
 {
 	if(head == NULL || head->next == NULL) // replace with assert (get some practice there)
 	{
@@ -54,6 +54,7 @@ void run_simulation(PNODE* head, unsigned char N)
 	printf("===== SIMULATION BEGINS =====\n");
 	printf("Number of lunches = %d\n", N);
 	printf("Maximum number of lunchers = %d\n", max_num_lunchers);
+	printf("output file = %s\n", output_file);
 	printf("=============================\n");
 	printf("Run simulation. All logic goes here\n");
 

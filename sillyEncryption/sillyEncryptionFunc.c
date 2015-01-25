@@ -6,6 +6,7 @@
 
 char* sillyEncrypt(char* keyword, char* toEncrypt)
 {
+	char* result = "tabletop";
 	// create empty string
 
 	// compute md5sum of keyword
@@ -19,5 +20,5 @@ char* sillyEncrypt(char* keyword, char* toEncrypt)
 
 	// return result
 
-	return "blah";
+	return result;
 }
