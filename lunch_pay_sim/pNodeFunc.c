@@ -46,24 +46,12 @@ PNODE* addParticipant(PNODE* head, char* parName, double offset)
 		printf("    Adding participant %s\n", parName);
 
 		// get to the end
-		#ifdef DEBUG
-		printf("    head: %s\n", head->name);
-		printf("    head ptr: %p\n", head);
-		#endif
 		PNODE* current = head;
 		while(current->next != NULL)
 		{
-			#ifdef DEBUG
-			printf("    passing %s\n", current->name);
-			printf("    passing %p\n", current);
-			#endif
 			current = current->next;
 		}
 
-		#ifdef DEBUG
-		printf("    tail: %s\n", current->name);
-		printf("    tail ptr: %p\n", current);
-		#endif
 		PNODE *newPNODE = malloc(sizeof(PNODE));
 		initParticipant(newPNODE, parName); // todo: move this out to another function for list
 		current->next = newPNODE;
@@ -156,11 +144,6 @@ void printList(PNODE* head)
 PNODE** transfer_node(unsigned char index, PNODE* from, PNODE* to)
 {
 	PNODE** results = malloc(sizeof(PNODE*));
-	#ifdef DEBUG
-	printf("\t\tindex = %d\n", index);
-	printf("\t\tfrom = %p\n", from);
-	printf("\t\tto = %p\n", to);
-	#endif
 
 	// ----- transfer actually occurs here -----
 	PNODE* target;
@@ -184,10 +167,6 @@ PNODE** transfer_node(unsigned char index, PNODE* from, PNODE* to)
 		}
 		prev->next = target->next;
 	}
-
-	#ifdef DEBUG
-	printf("\t\ttarget name = %s\n", target->name);
-	#endif
 
 	// update to list
 	if(to == NULL)
@@ -231,10 +210,6 @@ char* findPayer(PNODE* head)
 		}
 		cur = cur->next;
 	}
-
-	#ifdef DEBUG
-	printf("min_points = %d\n", min_points);
-	#endif
 
 	return result;
 }
