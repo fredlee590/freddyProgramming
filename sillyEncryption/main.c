@@ -48,6 +48,7 @@ int main(int argc, char** argv)
 		}
 	}
 
+	char* toEncrypt = "!!!!!";
 	if(strcmp("", keyword) == 0)
 	{
 		printf("Must have a keyword with which to encrypt arguments.\n");
@@ -59,10 +60,9 @@ int main(int argc, char** argv)
 		printf("Proceeding with encryption. Keyword is %s\n", keyword);
 	}
 
-	// algorithm for encryption
-
+	printf("%s\n", toEncrypt);
 	// print out encrypted string
-	printf("%s\n", sillyEncrypt(keyword, "blahblahblah"));
+	printf("%s\n", sillyEncrypt(keyword, toEncrypt));
 
 	return 0; // exit
 }

@@ -10,6 +10,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define RANGE ('~' - '!')
+
 char* sillyEncrypt(char* keyword, char* toEncrypt)
 {
 	int i;
@@ -38,10 +40,36 @@ char* sillyEncrypt(char* keyword, char* toEncrypt)
 		// compute offset from md5sum part
 		unsigned char offset = out[i] & 0xF;
 
-		char newChar = result[i] + (sign * offset);
+		// initialize to relative target
+		#ifdef DEBUG
+		printf("newChar = %c + (%d * %d)\n", result[i], sign, offset);
+		#endif
+
+		unsigned char newChar = result[i] + (sign * offset);
+
+		if(newChar < '!')
+		{
+			#ifdef DEBUG
+			printf("newChar %c (%d) is less than '!'\n", newChar, newChar);
+			#endif
+			newChar += RANGE;
+			#ifdef DEBUG
+			printf("new newChar %c (%d)\n", newChar, newChar);
+			#endif
+		}
+		else if(newChar > '~')
+		{
+			#ifdef DEBUG
+			printf("newChar %c (%d) is greater than '~'\n", newChar, newChar);
+			#endif
+			newChar -= RANGE;
+			#ifdef DEBUG
+			printf("new newChar %c (%d)\n", newChar, newChar);
+			#endif
+		}
 
 		#ifdef DEBUG
-		printf("%c %c\n", result[i], newChar);
+		printf("%c %c %d\n", result[i], newChar, newChar);
 		#endif
 
 		// add or subtract md5sum part to or from string to encrypt
