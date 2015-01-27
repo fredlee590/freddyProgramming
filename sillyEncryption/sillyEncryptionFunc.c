@@ -40,7 +40,9 @@ char* sillyEncrypt(char* keyword, char* toEncrypt)
 
 		char newChar = result[i] + (sign * offset);
 
+		#ifdef DEBUG
 		printf("%c %c\n", result[i], newChar);
+		#endif
 
 		// add or subtract md5sum part to or from string to encrypt
 		result[i] = newChar;
