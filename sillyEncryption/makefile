@@ -1,7 +1,7 @@
 GCC = gcc -Wall -g
 
 sillyEncryption : main.o sillyEncryptionFunc.o
-	$(GCC) -o sillyEncryption main.o sillyEncryptionFunc.o
+	$(GCC) -o sillyEncryption main.o sillyEncryptionFunc.o -lssl -lcrypto
 main.o : main.c sillyEncryptionFunc.h
 	$(GCC) -c main.c
 sillyEncryptionFunc.o : sillyEncryptionFunc.c sillyEncryptionFunc.h
