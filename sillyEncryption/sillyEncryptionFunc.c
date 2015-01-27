@@ -38,7 +38,7 @@ char* sillyEncrypt(char* keyword, char* toEncrypt)
 	for(i = 0; i < toEncrypt_len; i++)
 	{
 		// compute offset from md5sum part
-		unsigned char offset = out[i] & 0xF;
+		unsigned char offset = out[i % MD5_DIGEST_LENGTH] & 0xF;
 
 		// initialize to relative target
 		#ifdef DEBUG
