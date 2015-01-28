@@ -3,6 +3,4 @@
 
 char* sillyEncrypt(char* keyword, char* toEncrypt);
 
-#define N 256
-
 #endif
