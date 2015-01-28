@@ -2,7 +2,6 @@
 // main.c
 
 #include <stdio.h>
-#include <string.h>
 #include <getopt.h>
 #include "sillyEncryptionFunc.h"
 
@@ -25,7 +24,7 @@ int main(int argc, char** argv)
 	int opt;
 	int option_index = 0;
 
-	char keyword[N] = "";
+	char* keyword = NULL;
 	static struct option long_options[] = {
 		{"help",	no_argument,		0,	'h'	},
 		{"keyword",	required_argument,	0,	'k'	},
@@ -38,7 +37,7 @@ int main(int argc, char** argv)
 		switch(opt)
 		{
 			case 'k':
-				strcpy(keyword, optarg);
+				keyword = optarg;
 				break;
 			case 'h':
 				printHelp();
@@ -53,7 +52,7 @@ int main(int argc, char** argv)
 	#ifdef DEBUG
 	printf("toEncrypt = %s\n", toEncrypt);
 	#endif
-	if(strcmp("", keyword) == 0)
+	if(!keyword)
 	{
 		printf("Must have a keyword with which to encrypt arguments.\n");
 
