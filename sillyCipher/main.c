@@ -25,6 +25,7 @@ int main(int argc, char** argv)
 	int opt;
 	int option_index = 0;
 
+	int curarg = 1;
 	char* keyword = NULL;
 	char direction = ENCRYPT;
 	static struct option long_options[] = {
@@ -41,6 +42,7 @@ int main(int argc, char** argv)
 		{
 			case 'k':
 				keyword = optarg;
+				curarg++;
 				break;
 			case 'h':
 				printHelp();
@@ -50,13 +52,9 @@ int main(int argc, char** argv)
 			default:
 				break;
 		}
+		curarg++;
 	}
 
-	char* toXcrypt = argv[argc - 1];
-
-	#ifdef DEBUG
-	printf("toXcrypt = %s\n", toXcrypt);
-	#endif
 	if(!keyword)
 	{
 		printf("Must have a keyword with which to encrypt arguments.\n");
@@ -67,6 +65,22 @@ int main(int argc, char** argv)
 	{
 		printf("Proceeding with encryption. Keyword is %s\n", keyword);
 	}
+
+	char* toXcrypt = argv[curarg++];
+
+	if(curarg < argc)
+	{
+		#ifdef DEBUG
+		printf("%d %d\n", curarg, argc);
+		#endif
+		printf("Too many arguments. Need exactly one string to encrypt or decrypt.\n");
+		printf("Enclose your entire string with spaces with ' marks for more secure encryption.\n");
+		return 2;
+	}
+
+	#ifdef DEBUG
+	printf("toXcrypt = %s\n", toXcrypt);
+	#endif
 
 	// print out encrypted string
 	printf("%s\n", sillyXcrypt(keyword, toXcrypt, direction));
