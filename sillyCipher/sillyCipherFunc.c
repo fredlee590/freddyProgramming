@@ -1,5 +1,5 @@
 /*
- * sillyEncryptionFunc.c
+ * sillyXcryptionFunc.c
  *
  * Contains the encryption and support functions for encryption
  */
@@ -12,22 +12,22 @@
 
 #define RANGE ('~' - '!')
 
-char* sillyEncrypt(char* keyword, char* toEncrypt)
+char* sillyXcrypt(char* keyword, char* toXcrypt, char initialDir)
 {
 	int i;
 	MD5_CTX c;
 	unsigned char out[MD5_DIGEST_LENGTH];
 
 	// set up defaults
-	char sign = 1;
+	char sign = initialDir;
 
-	char* result = malloc(sizeof(char)*strlen(toEncrypt));
+	char* result = malloc(sizeof(char)*strlen(toXcrypt));
 
 	// compute md5sum of keyword
 	unsigned long keyword_len = strlen(keyword);
-	unsigned int toEncrypt_len = strlen(toEncrypt);
+	unsigned int toXcrypt_len = strlen(toXcrypt);
 
-	strcpy(result, toEncrypt);
+	strcpy(result, toXcrypt);
 
 	MD5_Init(&c);
 	MD5_Update(&c, keyword, keyword_len);
@@ -35,7 +35,7 @@ char* sillyEncrypt(char* keyword, char* toEncrypt)
 	MD5_Final(out, &c);
 
 	// walk down each part of the md5sum
-	for(i = 0; i < toEncrypt_len; i++)
+	for(i = 0; i < toXcrypt_len; i++)
 	{
 		// compute offset from md5sum part
 		unsigned char offset = out[i % MD5_DIGEST_LENGTH] & 0xF;

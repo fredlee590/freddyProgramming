@@ -3,19 +3,20 @@
 
 #include <stdio.h>
 #include <getopt.h>
-#include "sillyEncryptionFunc.h"
+#include "sillyCipherFunc.h"
 
 void printHelp()
 {
 	printf("\n");
-	printf("SillyEncryption is a fun project to quickly encrypt strings\n");
+	printf("SillyCipher is a fun project to quickly encrypt strings\n");
 	printf("\n");
 	printf("It was originally conceived for simple, single words like passwords\n");
 	printf("Usage:\n");
-	printf("\tsillyEncryption [options] -k [keyword] [string(s) to encrypt]\n");
+	printf("\tsillyCipher [options] -k [keyword] [string(s) to encrypt]\n");
 	printf("Options:\n");
-	printf("\t-h, --help: Display this help message\n");
 	printf("\t-k, --key [keyword]: Need a keyword with which to encrypt the argument(s) (required)\n");
+	printf("\t-d, --decrypt : Decrypts input argument with given keyword instead of default encryption\n");
+	printf("\t-h, --help: Display this help message\n");
 	printf("\n");
 }
 
@@ -25,14 +26,16 @@ int main(int argc, char** argv)
 	int option_index = 0;
 
 	char* keyword = NULL;
+	char direction = ENCRYPT;
 	static struct option long_options[] = {
-		{"help",	no_argument,		0,	'h'	},
+		{"decrypt",	no_argument,		0,	'd'	},
 		{"keyword",	required_argument,	0,	'k'	},
+		{"help",	no_argument,		0,	'h'	},
 		{0,		0,			0,	0	}
 	};
 
 	// process options
-	while((opt = getopt_long(argc, argv, "k:h", long_options, &option_index)) != -1)
+	while((opt = getopt_long(argc, argv, "k:dh", long_options, &option_index)) != -1)
 	{
 		switch(opt)
 		{
@@ -42,15 +45,17 @@ int main(int argc, char** argv)
 			case 'h':
 				printHelp();
 				return 0;
+			case 'd':
+				direction = DECRYPT;
 			default:
 				break;
 		}
 	}
 
-	char* toEncrypt = argv[argc - 1];
+	char* toXcrypt = argv[argc - 1];
 
 	#ifdef DEBUG
-	printf("toEncrypt = %s\n", toEncrypt);
+	printf("toXcrypt = %s\n", toXcrypt);
 	#endif
 	if(!keyword)
 	{
@@ -64,7 +69,7 @@ int main(int argc, char** argv)
 	}
 
 	// print out encrypted string
-	printf("%s\n", sillyEncrypt(keyword, toEncrypt));
+	printf("%s\n", sillyXcrypt(keyword, toXcrypt, direction));
 
 	return 0; // exit
 }
