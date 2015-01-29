@@ -10,7 +10,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define RANGE ('~' - '!')
+#define MAXCHAR '~'
+#define MINCHAR ' '
+#define RANGE (MAXCHAR - MINCHAR + 1)
 
 char* sillyXcrypt(char* keyword, char* toXcrypt, char initialDir)
 {
@@ -47,7 +49,7 @@ char* sillyXcrypt(char* keyword, char* toXcrypt, char initialDir)
 
 		unsigned char newChar = result[i] + (sign * offset);
 
-		if(newChar < '!')
+		if(newChar < MINCHAR)
 		{
 			#ifdef DEBUG
 			printf("newChar %c (%d) is less than '!'\n", newChar, newChar);
@@ -57,7 +59,7 @@ char* sillyXcrypt(char* keyword, char* toXcrypt, char initialDir)
 			printf("new newChar %c (%d)\n", newChar, newChar);
 			#endif
 		}
-		else if(newChar > '~')
+		else if(newChar > MAXCHAR)
 		{
 			#ifdef DEBUG
 			printf("newChar %c (%d) is greater than '~'\n", newChar, newChar);
@@ -69,7 +71,7 @@ char* sillyXcrypt(char* keyword, char* toXcrypt, char initialDir)
 		}
 
 		#ifdef DEBUG
-		printf("%c %c %d\n", result[i], newChar, newChar);
+		printf("%d %c %c %d\n", i, result[i], newChar, newChar);
 		#endif
 
 		// add or subtract md5sum part to or from string to encrypt
@@ -79,7 +81,7 @@ char* sillyXcrypt(char* keyword, char* toXcrypt, char initialDir)
 	}
 
 	#ifdef DEBUG
-	printf("\n");
+	printf("result = %s\n", result);
 	#endif
 
 	return result;
