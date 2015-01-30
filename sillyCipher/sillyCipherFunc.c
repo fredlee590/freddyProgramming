@@ -23,8 +23,7 @@ char* sillyXcrypt(char* keyword, char* toXcrypt, char initialDir)
 
 	// set up defaults
 	char sign = initialDir;
-
-	char* result = malloc(sizeof(char)*strlen(toXcrypt));
+	char* result = malloc(sizeof(char) * strlen(toXcrypt));
 
 	// compute md5sum of keyword
 	unsigned long keyword_len = strlen(keyword);
@@ -43,31 +42,31 @@ char* sillyXcrypt(char* keyword, char* toXcrypt, char initialDir)
 		// compute offset from md5sum part
 		unsigned char offset = out[i % MD5_DIGEST_LENGTH] & 0xF;
 
-		// initialize to relative target
 		#ifdef DEBUG
 		printf("newChar = %c + (%d * %d)\n", result[i], sign, offset);
 		#endif
 
 		unsigned char newChar = result[i] + (sign * offset);
 
+		// Bounds checking. Wrap around
 		if(newChar < MINCHAR)
 		{
 			#ifdef DEBUG
-			printf("newChar %c (%d) is less than '!'\n", newChar, newChar);
+			printf("newChar %c (%d) is less than '!' - ", newChar, newChar);
 			#endif
 			newChar += RANGE;
 			#ifdef DEBUG
-			printf("new newChar %c (%d)\n", newChar, newChar);
+			printf("adjusted to %c (%d)\n", newChar, newChar);
 			#endif
 		}
 		else if(newChar > MAXCHAR)
 		{
 			#ifdef DEBUG
-			printf("newChar %c (%d) is greater than '~'\n", newChar, newChar);
+			printf("newChar %c (%d) is greater than '~' - ", newChar, newChar);
 			#endif
 			newChar -= RANGE;
 			#ifdef DEBUG
-			printf("new newChar %c (%d)\n", newChar, newChar);
+			printf("adjusted to %c (%d)\n", newChar, newChar);
 			#endif
 		}
 
@@ -75,10 +74,11 @@ char* sillyXcrypt(char* keyword, char* toXcrypt, char initialDir)
 		printf("%d %c %c %d\n", i, result[i], newChar, newChar);
 		#endif
 
-		// add or subtract md5sum part to or from string to encrypt
+		// append to new string
 		result[i] = newChar;
 
 		// special case: Need to reserve apostrophes for use on the command line
+		// if we land here, go one more round
 		if(newChar == APOS)
 		{
 			i--;
@@ -87,10 +87,6 @@ char* sillyXcrypt(char* keyword, char* toXcrypt, char initialDir)
 
 		sign *= -1;
 	}
-
-	#ifdef DEBUG
-	printf("result = %s\n", result);
-	#endif
 
 	return result;
 }

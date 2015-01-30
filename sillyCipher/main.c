@@ -41,18 +41,21 @@ int main(int argc, char** argv)
 		switch(opt)
 		{
 			case 'k':
+				// assign keyword
 				keyword = optarg;
-				curarg++;
+				curarg++; // too many args?
 				break;
 			case 'h':
+				// help
 				printHelp();
 				return 0;
 			case 'd':
+				// decrypt instead of default encrypt
 				direction = DECRYPT;
 			default:
 				break;
 		}
-		curarg++;
+		curarg++; // too many args?
 	}
 
 	if(!keyword)
@@ -61,29 +64,18 @@ int main(int argc, char** argv)
 
 		return 0;
 	}
-	else
-	{
-		printf("Proceeding with encryption. Keyword is %s\n", keyword);
-	}
 
 	char* toXcrypt = argv[curarg++];
 
 	if(curarg < argc)
 	{
-		#ifdef DEBUG
-		printf("%d %d\n", curarg, argc);
-		#endif
 		printf("Too many arguments. Need exactly one string to encrypt or decrypt.\n");
-		printf("Enclose your entire string with spaces with ' marks for more secure encryption.\n");
+		printf("Enclose your entire string with spaces with apostrophes for more secure encryption.\n");
 		return 2;
 	}
-
-	#ifdef DEBUG
-	printf("toXcrypt = %s\n", toXcrypt);
-	#endif
 
 	// print out encrypted string
 	printf("%s\n", sillyXcrypt(keyword, toXcrypt, direction));
 
-	return 0; // exit
+	return 0;
 }
