@@ -11,6 +11,7 @@
 #include <stdlib.h>
 
 #define MAXCHAR '~'
+#define APOS 39
 #define MINCHAR ' '
 #define RANGE (MAXCHAR - MINCHAR + 1)
 
@@ -76,6 +77,13 @@ char* sillyXcrypt(char* keyword, char* toXcrypt, char initialDir)
 
 		// add or subtract md5sum part to or from string to encrypt
 		result[i] = newChar;
+
+		// special case: Need to reserve apostrophes for use on the command line
+		if(newChar == APOS)
+		{
+			i--;
+			continue;
+		}
 
 		sign *= -1;
 	}
