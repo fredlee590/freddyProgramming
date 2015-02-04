@@ -12,12 +12,7 @@ void printHelp()
 	printf("\n");
 	printf("It was originally conceived for simple, single words like passwords\n");
 	printf("Usage:\n");
-	printf("\tsillyCipher [options] -k [keyword] [string(s) to encrypt]\n");
-	printf("Options:\n");
-	printf("\t-k, --key [keyword]: Need a keyword with which to encrypt the argument(s) (required)\n");
-	printf("\t-d, --decrypt : Decrypts input argument with given keyword instead of default encryption\n");
-	printf("\t-h, --help: Display this help message\n");
-	printf("\n");
+	printf("\tHahahahaha You didn't think it would be that easy, did you!?\n");
 }
 
 int main(int argc, char** argv)
@@ -60,7 +55,7 @@ int main(int argc, char** argv)
 
 	if(!keyword)
 	{
-		printf("Must have a keyword with which to encrypt arguments.\n");
+		printf("Haha you suck!\n");
 
 		return 0;
 	}
@@ -69,8 +64,7 @@ int main(int argc, char** argv)
 
 	if(curarg < argc)
 	{
-		printf("Too many arguments. Need exactly one string to encrypt or decrypt.\n");
-		printf("Enclose your entire string with spaces with apostrophes for more secure encryption.\n");
+		printf("LOL nope!\n");
 		return 2;
 	}
 
