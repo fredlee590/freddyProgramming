@@ -62,7 +62,7 @@ int main(int argc, char** argv)
 
 	char* toXcrypt = argv[curarg++];
 
-	if(curarg < argc)
+	if(curarg != argc)
 	{
 		printf("LOL nope!\n");
 		return 2;
