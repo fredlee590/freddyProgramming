@@ -2,6 +2,7 @@
 // main.c
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <getopt.h>
 #include "sillyCipherFunc.h"
 
@@ -23,15 +24,18 @@ int main(int argc, char** argv)
 	int curarg = 1;
 	char* keyword = NULL;
 	char direction = ENCRYPT;
+	char* file_to_read = NULL;
+
 	static struct option long_options[] = {
 		{"decrypt",	no_argument,		0,	'd'	},
 		{"keyword",	required_argument,	0,	'k'	},
 		{"help",	no_argument,		0,	'h'	},
+		{"file",	required_argument,	0,	'f'	},
 		{0,		0,			0,	0	}
 	};
 
 	// process options
-	while((opt = getopt_long(argc, argv, "k:dh", long_options, &option_index)) != -1)
+	while((opt = getopt_long(argc, argv, "dk:f:h", long_options, &option_index)) != -1)
 	{
 		switch(opt)
 		{
@@ -47,6 +51,10 @@ int main(int argc, char** argv)
 			case 'd':
 				// decrypt instead of default encrypt
 				direction = DECRYPT;
+			case 'f':
+				// decrypt file instead
+				file_to_read = optarg;
+				curarg++; // too many args?
 			default:
 				break;
 		}
@@ -60,16 +68,55 @@ int main(int argc, char** argv)
 		return 0;
 	}
 
-	char* toXcrypt = argv[curarg++];
-
-	if(curarg != argc)
+	if(file_to_read == NULL)
 	{
-		printf("LOL nope!\n");
-		return 2;
-	}
+		char* toXcrypt = argv[curarg++];
 
-	// print out encrypted string
-	printf("%s\n", sillyXcrypt(keyword, toXcrypt, direction));
+		if(curarg != argc)
+		{
+			printf("LOL nope!\n");
+			return 2;
+		}
+
+		// print out encrypted string
+		printf("%s\n", sillyXcrypt(keyword, toXcrypt, direction));
+	}
+	else
+	{
+		long fSize;
+		char* buff;
+
+		// load file into buffer
+		FILE* file = fopen(file_to_read, "r");
+
+		if(file == NULL) // todo: replace with assert
+		{
+			fputs("File error", stderr);
+			exit(1);
+		}
+
+		// cycle through entire file
+		// todo: do this N char by N char
+		// first, find file size
+		fseek(file, 0, SEEK_END);
+		fSize = ftell(file);
+		rewind(file);
+
+		buff = (char*)malloc(sizeof(char) * fSize);
+
+		if(fread(buff, 1, fSize, file) == fSize)
+		{
+			printf("%s\n", sillyXcrypt(keyword, buff, direction));
+		}
+		else
+		{
+			fputs("Reading error", stderr);
+			exit(2);
+		}
+
+		// done with file
+		fclose(file);
+	}
 
 	return 0;
 }
