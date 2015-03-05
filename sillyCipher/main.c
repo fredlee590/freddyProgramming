@@ -68,30 +68,27 @@ int main(int argc, char** argv)
 		return 0;
 	}
 
+	char* toXcrypt;
 	if(file_to_read == NULL)
 	{
-		char* toXcrypt = argv[curarg++];
+		toXcrypt = argv[curarg++];
 
 		if(curarg != argc)
 		{
 			printf("LOL nope!\n");
 			return 2;
 		}
-
-		// print out encrypted string
-		printf("%s\n", sillyXcrypt(keyword, toXcrypt, direction));
 	}
 	else
 	{
 		long fSize;
-		char* buff;
 
 		// load file into buffer
 		FILE* file = fopen(file_to_read, "r");
 
 		if(file == NULL) // todo: replace with assert
 		{
-			fputs("File error", stderr);
+			fputs("File error\n", stderr);
 			exit(1);
 		}
 
@@ -102,21 +99,21 @@ int main(int argc, char** argv)
 		fSize = ftell(file);
 		rewind(file);
 
-		buff = (char*)malloc(sizeof(char) * fSize);
+		// load file to string
+		toXcrypt = (char*)malloc(sizeof(char) * fSize);
 
-		if(fread(buff, 1, fSize, file) == fSize)
+		if(fread(toXcrypt, 1, fSize, file) != fSize)
 		{
-			printf("%s\n", sillyXcrypt(keyword, buff, direction));
-		}
-		else
-		{
-			fputs("Reading error", stderr);
+			fputs("Reading error\n", stderr);
 			exit(2);
 		}
 
 		// done with file
 		fclose(file);
 	}
+
+	// print string to encrypt or decrypt, whatever it was
+	printf("%s\n", sillyXcrypt(keyword, toXcrypt, direction));
 
 	return 0;
 }
