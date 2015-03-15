@@ -51,13 +51,16 @@ int main(int argc, char** argv)
 			case 'd':
 				// decrypt instead of default encrypt
 				direction = DECRYPT;
+				break;
 			case 'f':
 				// decrypt file instead
 				file_to_read = optarg;
 				curarg++; // too many args?
+				break;
 			default:
 				break;
 		}
+
 		curarg++; // too many args?
 	}
 
