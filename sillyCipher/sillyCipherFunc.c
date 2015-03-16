@@ -15,7 +15,7 @@
 #define MINCHAR ' '
 #define RANGE (MAXCHAR - MINCHAR + 1)
 
-char* sillyXcrypt(char* keyword, char* toXcrypt, char initialDir)
+char* sillyXcrypt(char* keyword, char* toXcrypt, char initialDir, char* file_to_read)
 {
 	int i;
 	MD5_CTX c;
@@ -46,7 +46,15 @@ char* sillyXcrypt(char* keyword, char* toXcrypt, char initialDir)
 		printf("newChar = %c + (%d * %d)\n", result[i], sign, offset);
 		#endif
 
-		unsigned char newChar = result[i] + (sign * offset);
+		unsigned char oldChar = result[i];
+
+		// keep non-printed characters the same (eg. end of file chars). todo: determine if this is feasible to keep.
+		if(oldChar < MINCHAR || oldChar > MAXCHAR)
+		{
+			continue;
+		}
+
+		unsigned char newChar = oldChar + (sign * offset);
 
 		// Bounds checking. Wrap around
 		if(newChar < MINCHAR)
@@ -78,8 +86,9 @@ char* sillyXcrypt(char* keyword, char* toXcrypt, char initialDir)
 		result[i] = newChar;
 
 		// special case: Need to reserve apostrophes for use on the command line
+		// todo: make apostrophes okay for files?
 		// if we land here, go one more round
-		if(newChar == APOS)
+		if(newChar == APOS && !file_to_read)
 		{
 			i--;
 			continue;

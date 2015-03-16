@@ -116,7 +116,7 @@ int main(int argc, char** argv)
 	}
 
 	// print string to encrypt or decrypt, whatever it was
-	printf("%s\n", sillyXcrypt(keyword, toXcrypt, direction));
+	printf("%s\n", sillyXcrypt(keyword, toXcrypt, direction, file_to_read));
 
 	return 0;
 }
