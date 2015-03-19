@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <getopt.h>
 #include "sillyCipherFunc.h"
 
@@ -26,17 +27,19 @@ int main(int argc, char** argv)
 	char* keyword = NULL;
 	char direction = ENCRYPT;
 	char* file_to_read = NULL;
+	char* file_to_write = NULL;
 
 	static struct option long_options[] = {
 		{"decrypt",	no_argument,		0,	'd'	},
 		{"keyword",	required_argument,	0,	'k'	},
 		{"help",	no_argument,		0,	'h'	},
 		{"file",	required_argument,	0,	'f'	},
+		{"output",	required_argument,	0,	'o'	},
 		{0,		0,			0,	0	}
 	};
 
 	// process options
-	while((opt = getopt_long(argc, argv, "dk:f:h", long_options, &option_index)) != -1)
+	while((opt = getopt_long(argc, argv, "dk:f:o:h", long_options, &option_index)) != -1)
 	{
 		switch(opt)
 		{
@@ -57,6 +60,11 @@ int main(int argc, char** argv)
 				// decrypt file instead
 				file_to_read = optarg;
 				curarg++; // too many args?
+				break;
+			case 'o':
+				// output to file named arg instead of stdout
+				file_to_write = optarg;
+				curarg++;
 				break;
 			default:
 				break;
@@ -117,7 +125,17 @@ int main(int argc, char** argv)
 	}
 
 	// print string to encrypt or decrypt, whatever it was
-	printf("%s\n", sillyXcrypt(keyword, toXcrypt, direction, file_to_read));
+	char* XcryptedStr = sillyXcrypt(keyword, toXcrypt, direction, file_to_read);
+	if(file_to_write)
+	{
+		FILE* file = fopen(file_to_write, "w");
+		fwrite(XcryptedStr, sizeof(char), strlen(XcryptedStr), file);
+		fclose(file);
+	}
+	else
+	{
+		printf("%s\n", XcryptedStr);
+	}
 
 	return 0;
 }
