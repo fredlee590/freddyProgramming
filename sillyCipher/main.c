@@ -11,7 +11,8 @@ void printHelp()
 	printf("\n");
 	printf("SillyCipher is a fun project to quickly encrypt strings\n");
 	printf("\n");
-	printf("It was originally conceived for simple, single words like passwords\n");
+	printf("It was originally conceived for simple, single words like passwords, but was later adapted to\n");
+	printf("encrypt files.\n");
 	printf("Usage:\n");
 	printf("\tHahahahaha You didn't think it would be that easy, did you!?\n");
 }
