@@ -19,14 +19,13 @@ void printHelp()
 	printf("options\n");
 	printf("\t-l, --lunches [number of lunches for this sim]\n");
 	printf("\t-o, --output [name of file to output data in CSV format]\n");
-	printf("\t-b, --bigbuyer [price to add to represent big buyer]\n");
+	printf("\t-f, --offset [price to add to represent big buyer]\n");
 	printf("\t-h, --help\n");
 
 	return;
 }
 
 // actually run simulation
-// todo: decide where to send CSV information. add an input to indicate output type
 // input: pNode function indicating participant list, number of lunches
 // output: none
 void run_simulation(PNODE* head, unsigned char N, char* output_file_name)

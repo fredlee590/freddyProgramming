@@ -109,7 +109,6 @@ PNODE* join_lists(PNODE* head1, PNODE* head2)
 }
 
 // Print important information in list
-// todo: print data in CSV format if --output option is set
 // Input: pNode pointer indicating list to print
 // Output: none
 void printList(PNODE* head)

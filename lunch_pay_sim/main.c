@@ -96,7 +96,6 @@ int main(int argc, char** argv)
 		}
 		else if(num_choice == 3) // run simulation
 		{
-			// todo: implement use of output file
 			run_simulation(parList, num_lunches, output_file);
 			break;
 		}
