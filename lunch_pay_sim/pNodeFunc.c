@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <stdio.h> // maybe remove this after testing
 #include <string.h>
+#include <assert.h>
 #include "pNode.h"
 
 void initParticipant(PNODE* parNodePtr, char* parName);
@@ -20,6 +21,8 @@ void free_all(PNODE* head);
 // Output: none
 void initParticipant(PNODE* parNodePtr, char* parName)
 {
+	assert(parNodePtr);
+
 	strcpy(parNodePtr->name, parName);
 	parNodePtr->num_lunches = 0;
 	parNodePtr->points = 0;
@@ -34,7 +37,7 @@ void initParticipant(PNODE* parNodePtr, char* parName)
 // Output: Head pNode pointer to indicate list
 PNODE* addParticipant(PNODE* head, char* parName, double offset)
 {
-	if ( head == NULL )
+	if(head == NULL)
 	{
 		printf("    Empty list. Adding first participant\n");
 		head = malloc(sizeof(PNODE));
@@ -113,7 +116,7 @@ PNODE* join_lists(PNODE* head1, PNODE* head2)
 // Output: none
 void printList(PNODE* head)
 {
-	if ( head == NULL )
+	if(head == NULL)
 	{
 		printf("Participant list is null. Nothing to print\n");
 	}
@@ -142,6 +145,8 @@ void printList(PNODE* head)
 // Output: Array of pNode pointers indicating both pNode pointers
 PNODE** transfer_node(unsigned char index, PNODE* from, PNODE* to)
 {
+	assert(get_length(from) >= index);
+
 	PNODE** results = malloc(sizeof(PNODE*));
 
 	// ----- transfer actually occurs here -----
@@ -239,6 +244,8 @@ PNODE* updatePoints(PNODE* head, char* payerName, unsigned char num_lunchers)
 // Output: none
 void free_all(PNODE* head)
 {
+	assert(head);
+
 	if(head->next == NULL)
 	{
 		free(head);
