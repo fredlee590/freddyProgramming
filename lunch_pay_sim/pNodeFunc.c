@@ -37,7 +37,7 @@ void initParticipant(PNODE* parNodePtr, char* parName)
 // Output: Head pNode pointer to indicate list
 PNODE* addParticipant(PNODE* head, char* parName, double offset)
 {
-	if(head == NULL)
+	if(!head)
 	{
 		printf("    Empty list. Adding first participant\n");
 		head = malloc(sizeof(PNODE));
@@ -91,7 +91,7 @@ unsigned char get_length(PNODE* head)
 // Output: pNode pointer of the two combined lists
 PNODE* join_lists(PNODE* head1, PNODE* head2)
 {
-	if(head1 == NULL)
+	if(!head1)
 	{
 		return head2;
 	}
@@ -116,14 +116,14 @@ PNODE* join_lists(PNODE* head1, PNODE* head2)
 // Output: none
 void printList(PNODE* head)
 {
-	if(head == NULL)
+	if(!head)
 	{
 		printf("Participant list is null. Nothing to print\n");
 	}
 	else
 	{
 		PNODE* current = head;
-		while(current != NULL)
+		while(current)
 		{
 			printf("Participant: %s\n", current->name);
 			#ifdef DEBUG
@@ -173,14 +173,14 @@ PNODE** transfer_node(unsigned char index, PNODE* from, PNODE* to)
 	}
 
 	// update to list
-	if(to == NULL)
+	if(!to)
 	{
 		to = target;
 	}
 	else
 	{
 		PNODE* cur = to;
-		while(cur->next != NULL)
+		while(cur->next)
 		{
 			cur = cur->next;
 		}
@@ -204,7 +204,7 @@ char* findPayer(PNODE* head)
 	char min_points = 127;
 	char* result = "";
 
-	while(cur != NULL)
+	while(cur)
 	{
 		char cur_points = cur->points;
 		if(cur_points < min_points)
@@ -224,7 +224,7 @@ char* findPayer(PNODE* head)
 PNODE* updatePoints(PNODE* head, char* payerName, unsigned char num_lunchers)
 {
 	PNODE* cur = head;
-	while(cur != NULL)
+	while(cur)
 	{
 		if(strcmp(cur->name, payerName) == 0)
 		{
@@ -246,7 +246,7 @@ void free_all(PNODE* head)
 {
 	assert(head);
 
-	if(head->next == NULL)
+	if(!head->next)
 	{
 		free(head);
 	}

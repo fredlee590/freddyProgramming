@@ -30,7 +30,7 @@ void printHelp()
 // output: none
 void run_simulation(PNODE* head, unsigned char N, char* output_file_name)
 {
-	if(head == NULL || head->next == NULL) // replace with assert (get some practice there)
+	if(!head || !head->next) // replace with assert (get some practice there)
 	{
 		printf("Not enough lunch participants!\nUseless simulation!\n");
 		return;
