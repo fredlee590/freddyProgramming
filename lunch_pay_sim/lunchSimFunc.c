@@ -6,7 +6,6 @@
 #include <time.h> // time to use for seed random
 #include <stdio.h> // printing
 #include <string.h> // string check
-#include <assert.h> // asserts
 #include "pNode.h" // primary data structure
 #include "pNodeFunc.h" // pNode functions
 
@@ -31,8 +30,11 @@ void printHelp()
 // output: none
 void run_simulation(PNODE* head, unsigned char N, char* output_file_name)
 {
-	assert(head);
-	assert(head->next);
+	if(head == NULL || head->next == NULL) // replace with assert (get some practice there)
+	{
+		printf("Not enough lunch participants!\nUseless simulation!\n");
+		return;
+	}
 
 	unsigned char i;
 	PNODE** linked_lists = malloc(sizeof(PNODE*));
