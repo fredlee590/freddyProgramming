@@ -67,7 +67,7 @@ int main(int argc, char** argv)
 				return 0;
 			case '?':
 				printf("option ?\n");
-				break;
+				return 1;
 			default:
 				printf("unknown option - %d\n", opt);
 				break;
