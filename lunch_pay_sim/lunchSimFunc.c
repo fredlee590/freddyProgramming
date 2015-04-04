@@ -28,9 +28,9 @@ void printHelp()
 // actually run simulation
 // input: pNode function indicating participant list, number of lunches
 // output: none
-void run_simulation(PNODE* head, unsigned char N, char* output_file_name)
+void run_simulation(PNODE* head, unsigned char num_lunches, char* output_file_name)
 {
-	if(!head || !head->next) // replace with assert (get some practice there)
+	if(!head || !head->next)
 	{
 		printf("Not enough lunch participants!\nUseless simulation!\n");
 		return;
@@ -40,7 +40,7 @@ void run_simulation(PNODE* head, unsigned char N, char* output_file_name)
 	PNODE** linked_lists = malloc(sizeof(PNODE*));
 	linked_lists[0] = head;
 
-	if(N < 2)
+	if(num_lunches < 2)
 	{
 		printf("Need at least 2 lunches for a meaningful simulation\n");
 		return;
@@ -55,7 +55,7 @@ void run_simulation(PNODE* head, unsigned char N, char* output_file_name)
 	}
 
 	printf("===== SIMULATION BEGINS =====\n");
-	printf("Number of lunches = %d\n", N);
+	printf("Number of lunches = %d\n", num_lunches);
 	printf("Maximum number of lunchers = %d\n", max_num_lunchers);
 	printf("output file = %s\n", output_file_name);
 	printf("=============================\n");
@@ -66,7 +66,7 @@ void run_simulation(PNODE* head, unsigned char N, char* output_file_name)
 	printf("\n");
 
 	// do this for all lunches
-	for(i = 1; i <= N; i++)
+	for(i = 1; i <= num_lunches; i++)
 	{
 		printf("----- Lunch %d -----\n", i);
 		double lunchSum = 0.0;
