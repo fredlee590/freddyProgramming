@@ -19,7 +19,7 @@ int main(int argc, char** argv)
 	int option_index = 0;
 
 	unsigned char num_lunches = 5;
-	char output_file[256] = ""; // todo: make this more robust
+	char* output_file = "";
 	double offset = 0.00;
 
 	// process options
@@ -47,7 +47,7 @@ int main(int argc, char** argv)
 			case 'o':
 				if(optarg)
 				{
-					strcpy(output_file, optarg);
+					output_file = optarg;
 				}
 				#ifdef DEBUG
 				printf("option o - %s\n", output_file);
