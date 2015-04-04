@@ -40,7 +40,7 @@ void run_simulation(PNODE* head, unsigned char num_lunches, char* output_file_na
 	PNODE** linked_lists = malloc(sizeof(PNODE*));
 	linked_lists[0] = head;
 
-	if(num_lunches < 2)
+	if(num_lunches < 2) // assert with error message?
 	{
 		printf("Need at least 2 lunches for a meaningful simulation\n");
 		return;
@@ -102,6 +102,10 @@ void run_simulation(PNODE* head, unsigned char num_lunches, char* output_file_na
 			lunchSum += lunchPrice;
 			cur_luncher->num_lunches++;
 
+			// TODO: Refactor to output all participants to output file. Something like the following.
+			// Will probably require linked list sorting.
+			// Lunch number | participant 1 $ spent | ... | participant N $ spent | total $
+			// Lunch number | participant 1 points | ... | participant N points | payer
 			if(output_file)
 			{
 				fprintf(output_file, "%d,%s,%.2f,%d,%s\n", i, cur_luncher->name, lunchPrice, cur_luncher->points, payer->name);
