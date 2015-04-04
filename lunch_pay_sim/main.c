@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <getopt.h>
+#include <assert.h>
 #include "pNode.h"
 #include "pNodeFunc.h"
 #include "lunchSimFunc.h"
@@ -39,6 +40,7 @@ int main(int argc, char** argv)
 				if(optarg)
 				{
 					num_lunches = atoi(optarg);
+					assert(num_lunches > 0);
 				}
 				#ifdef DEBUG
 				printf("option l - %d\n", num_lunches);
@@ -57,6 +59,7 @@ int main(int argc, char** argv)
 				if(optarg)
 				{
 					offset = atof(optarg);
+					assert(offset > 0);
 				}
 				#ifdef DEBUG
 				printf("option b - %.2f\n", offset);
