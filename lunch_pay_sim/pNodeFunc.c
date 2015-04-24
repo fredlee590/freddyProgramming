@@ -14,6 +14,7 @@ unsigned char get_length(PNODE* head);
 PNODE* join_lists(PNODE* head1, PNODE* head2);
 void printList(PNODE* head);
 PNODE** transfer_node(unsigned char index, PNODE* from, PNODE* to);
+PNODE* sort_list(PNODE* head);
 void free_all(PNODE* head);
 
 // Initialize participant node. Set pNode to essentially a zero state with name.
@@ -237,6 +238,56 @@ PNODE* updatePoints(PNODE* head, char* payerName, unsigned char num_lunchers)
 		cur = cur->next;
 	}
 	return head;
+}
+
+// Sort List alphabetically by participant name
+// Input: pNode pointer indicating list of participants
+// Output: pNode pointer indicating sorted list of participants
+PNODE* sort_list(PNODE* head)
+{
+	// algorithm: pull head node and sort one by one. return sorted head
+	PNODE* cur_head = head;
+	PNODE* sorted_head = NULL;
+	PNODE* sort_cand = NULL;
+
+	// for entire list
+	while(cur_head)
+	{
+		sort_cand = cur_head;
+		#ifdef DEBUG
+		printf("sort_cand = %s\n", sort_cand->name);
+		#endif
+		cur_head = cur_head->next;
+
+		if(!sorted_head)
+		{
+			// essentially create sorted head
+			sorted_head = sort_cand;
+			sorted_head->next = NULL;
+		}
+		else if(strcmp(sort_cand->name, sorted_head->name) < 0)
+		{
+			// candidate should go before current head
+			sort_cand->next = sorted_head;
+			sorted_head = sort_cand;
+		}
+		else
+		{
+			// search to the right to find right place for sort_cand
+			PNODE* cur_sorted = sorted_head;
+			char* cand_name = sort_cand->name;
+
+			while(cur_sorted->next && strcmp(cur_sorted->next->name, cand_name) < 0)
+			{
+				cur_sorted = cur_sorted->next;
+			}
+
+			sort_cand->next = cur_sorted->next;
+			cur_sorted->next = sort_cand;
+		}
+	}
+
+	return sorted_head;
 }
 
 // Free all nodes at the end of the sim

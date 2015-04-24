@@ -9,6 +9,7 @@ void printList(PNODE* parNodePtr);
 PNODE** transfer_node(unsigned char index, PNODE* from, PNODE* to);
 PNODE* findPayer(PNODE* head);
 PNODE* updatePoints(PNODE* head, char* payerName, unsigned char num_lunchers);
+PNODE* sort_list(PNODE* head);
 void free_all(PNODE* head);
 
 #endif

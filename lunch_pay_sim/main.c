@@ -95,6 +95,7 @@ int main(int argc, char** argv)
 		}
 		else if(num_choice == 2) // check status through printing
 		{
+			parList = sort_list(parList);
 			printList(parList);
 		}
 		else if(num_choice == 3) // run simulation
