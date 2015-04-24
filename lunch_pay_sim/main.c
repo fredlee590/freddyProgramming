@@ -77,6 +77,14 @@ int main(int argc, char** argv)
 		}
 	}
 
+	// TODO: Transfer this to a command line type structure. Commands like
+	//       add <participant name>
+	//       del <participant name> ?
+	//       show
+	//       sim
+	//       quit
+	//       help
+
 	// decide what to do
 	while(1)
 	{
