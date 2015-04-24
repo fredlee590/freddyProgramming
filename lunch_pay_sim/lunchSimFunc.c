@@ -102,15 +102,6 @@ void run_simulation(PNODE* head, unsigned char num_lunches, char* output_file_na
 			lunchSum += lunchPrice;
 			cur_luncher->num_lunches++;
 
-			// TODO: Refactor to output all participants to output file. Something like the following.
-			// Will probably require linked list sorting.
-			// Lunch number | participant 1 $ spent | ... | participant N $ spent | total $
-			// Lunch number | participant 1 points | ... | participant N points | payer
-			if(output_file)
-			{
-				fprintf(output_file, "%d,%s,%.2f,%d,%s\n", i, cur_luncher->name, lunchPrice, cur_luncher->points, payer->name);
-			}
-
 			cur_luncher = cur_luncher->next;
 		}
 
@@ -124,6 +115,19 @@ void run_simulation(PNODE* head, unsigned char num_lunches, char* output_file_na
 
 		// TODO 1: sort here and print out based on that order
 		// TODO 2: print out to file if applicable
+		head = sort_list(head);
+		if(output_file)
+		{
+			fprintf(output_file, "%d", i);
+			PNODE* writePtr = head;
+			while(writePtr)
+			{
+				// TODO: raw price data goes here. Headings, etc also should be here
+				fprintf(output_file, ",%.2f", writePtr->bought);
+				writePtr = writePtr->next;
+			}
+			fprintf(output_file, "\n");
+		}
 	}
 
 	if(output_file)
