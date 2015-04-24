@@ -121,6 +121,9 @@ void run_simulation(PNODE* head, unsigned char num_lunches, char* output_file_na
 		printList(lunchers);
 
 		head = join_lists(head, lunchers);
+
+		// TODO 1: sort here and print out based on that order
+		// TODO 2: print out to file if applicable
 	}
 
 	if(output_file)
