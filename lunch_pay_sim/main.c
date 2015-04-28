@@ -10,11 +10,15 @@
 #include "pNodeFunc.h"
 #include "lunchSimFunc.h"
 
+#define MAX_STR_LENGTH 256
+
 // main function to process options and decide what to do
 int main(int argc, char** argv)
 {
 	// initializations and declarations
-	unsigned int num_choice;
+	char input[MAX_STR_LENGTH];
+	char* command = "";
+
 	int opt;
 	PNODE* parList = NULL;
 	int option_index = 0;
@@ -78,38 +82,67 @@ int main(int argc, char** argv)
 	}
 
 	// TODO: Transfer this to a command line type structure. Commands like
-	//       add <participant name>
-	//       del <participant name> ?
-	//       show
-	//       sim
-	//       quit
-	//       help
+	//       add <participant name> 1
+	//       del <participant name> ? 2
+	//       show 1
+	//       run 1
+	//       quit 2
+	//       help 3
 
 	// decide what to do
 	while(1)
 	{
-		printf("Enter\n");
-		printf("    1 to add participant\n");
-		printf("    2 to print participants\n");
-		printf("    3 to run simulation\n\n");
-		scanf("%d", &num_choice);
+		printf("> ");
+		fgets(input, MAX_STR_LENGTH, stdin); // TODO: check return code for anything meaningful
 
-		if(num_choice == 1) // add a participant
+		#ifdef DEBUG
+		printf("input is %s\n", input);
+		#endif
+
+		// parse with strtok
+		command = strtok(input, " \n");
+
+		#ifdef DEBUG
+		printf("command is %s\n", command);
+		#endif
+
+		if(!command) // TODO: judge usefulness of this given above TODO.
 		{
-			char newName[256] = "";
-			printf("Add next participant here\n");
-			scanf("%s", newName);
-			parList = addParticipant(parList, newName, offset);
+			command = "";
 		}
-		else if(num_choice == 2) // check status through printing
+
+		if(strcmp(command, "add") == 0) // add a participant
+		{
+			char* command_arg = strtok(NULL, " \n");
+			if(!command_arg)
+			{
+				printf("Need argument: Participant name\n");
+				continue;
+			}
+
+			if(strtok(NULL, " \n"))
+			{
+				printf("Too many arguments. Require no spaces in participant ID.\n");
+				continue;
+			}
+
+			printf("Adding %s\n", command_arg);
+			parList = addParticipant(parList, command_arg, offset);
+		}
+		else if(strcmp(command, "show") == 0) // check status through printing
 		{
 			parList = sort_list(parList);
 			printList(parList);
 		}
-		else if(num_choice == 3) // run simulation
+		else if(strcmp(command, "run") == 0) // run simulation
 		{
 			run_simulation(parList, num_lunches, output_file);
 			break;
+		}
+		else if(strcmp(command, "exit") == 0)
+		{
+			free_all(parList);
+			return 0;
 		}
 		else // all other options. throw error.
 		{
