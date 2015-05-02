@@ -295,14 +295,13 @@ PNODE* sort_list(PNODE* head)
 // Output: none
 void free_all(PNODE* head)
 {
-	assert(head);
-
-	if(!head->next)
+	if(head)
 	{
+		free_all(head->next);
 		free(head);
 	}
 	else
 	{
-		free_all(head->next);
+		return;
 	}
 }
