@@ -12,6 +12,18 @@
 
 #define MAX_STR_LENGTH 256
 
+void printHelp()
+{
+	printf("lunch_pay_sim [options]\n");
+	printf("options\n");
+	printf("\t-l, --lunches [number of lunches for this sim]\n");
+	printf("\t-o, --output [name of file to output data in CSV format]\n");
+	printf("\t-f, --offset [price to add to represent big buyer]\n");
+	printf("\t-h, --help\n");
+
+	return;
+}
+
 // main function to process options and decide what to do
 int main(int argc, char** argv)
 {
