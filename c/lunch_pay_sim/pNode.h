@@ -5,7 +5,7 @@
 typedef struct pNode
 {
 	char name[256];
-	unsigned char num_lunches;
+	unsigned char numLunches;
 	char points;
 	double bought;
 	double paid;

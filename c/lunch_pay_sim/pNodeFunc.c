@@ -10,12 +10,12 @@
 
 void initParticipant(PNODE* parNodePtr, char* parName);
 PNODE* addParticipant(PNODE* head, char* parName, double offset);
-unsigned char get_length(PNODE* head);
-PNODE* join_lists(PNODE* head1, PNODE* head2);
+unsigned char getLength(PNODE* head);
+PNODE* joinLists(PNODE* head1, PNODE* head2);
 void printList(PNODE* head);
-PNODE** transfer_node(unsigned char index, PNODE* from, PNODE* to);
-PNODE* sort_list(PNODE* head);
-void free_all(PNODE* head);
+PNODE** transferNode(unsigned char index, PNODE* from, PNODE* to);
+PNODE* sortList(PNODE* head);
+void freeAll(PNODE* head);
 
 // Initialize participant node. Set pNode to essentially a zero state with name.
 // Input: Participant node, Participant name with which to initialize
@@ -25,7 +25,7 @@ void initParticipant(PNODE* parNodePtr, char* parName)
 	assert(parNodePtr);
 
 	strcpy(parNodePtr->name, parName);
-	parNodePtr->num_lunches = 0;
+	parNodePtr->numLunches = 0;
 	parNodePtr->points = 0;
 	parNodePtr->bought = 0.0;
 	parNodePtr->paid = 0.0;
@@ -67,7 +67,7 @@ PNODE* addParticipant(PNODE* head, char* parName, double offset)
 // todo: handle this by either exiting, or increasing maximum length
 // Input: Head pNode pointer
 // Output: number indicating how long the node is
-unsigned char get_length(PNODE* head)
+unsigned char getLength(PNODE* head)
 {
 	if(!head)
 	{
@@ -90,7 +90,7 @@ unsigned char get_length(PNODE* head)
 // Combine two lists
 // Input: pNode pointer indicating first pNode list, pNode pointer indicating second pNode list
 // Output: pNode pointer of the two combined lists
-PNODE* join_lists(PNODE* head1, PNODE* head2)
+PNODE* joinLists(PNODE* head1, PNODE* head2)
 {
 	if(!head1)
 	{
@@ -130,7 +130,7 @@ void printList(PNODE* head)
 			#ifdef DEBUG
 			printf("\tAddr: %p\n", current);
 			#endif
-			printf("\tnum_lunches: %d\n", current->num_lunches);
+			printf("\tnumLunches: %d\n", current->numLunches);
 			printf("\tpoints: %d\n", current->points);
 			printf("\tbought: %.2f\n", current->bought);
 			printf("\tpaid: %.2f\n", current->paid);
@@ -144,9 +144,9 @@ void printList(PNODE* head)
 // Move pNode from one list to another. Change references around.
 // Input: Index indicating which node to move, pNode pointer indicating source list, pNode pointer indicating destination list
 // Output: Array of pNode pointers indicating both pNode pointers
-PNODE** transfer_node(unsigned char index, PNODE* from, PNODE* to)
+PNODE** transferNode(unsigned char index, PNODE* from, PNODE* to)
 {
-	assert(get_length(from) >= index);
+	assert(getLength(from) >= index);
 
 	PNODE** results = malloc(sizeof(PNODE*));
 
@@ -202,15 +202,15 @@ PNODE** transfer_node(unsigned char index, PNODE* from, PNODE* to)
 char* findPayer(PNODE* head)
 {
 	PNODE* cur = head;
-	char min_points = 127;
+	char minPoints = 127;
 	char* result = "";
 
 	while(cur)
 	{
-		char cur_points = cur->points;
-		if(cur_points < min_points)
+		char curPoints = cur->points;
+		if(curPoints < minPoints)
 		{
-			min_points = cur_points;
+			minPoints = curPoints;
 			result = cur->name;
 		}
 		cur = cur->next;
@@ -222,14 +222,14 @@ char* findPayer(PNODE* head)
 // Update points based on specified payer and number of people on the lunch
 // Input: pNode pointer indicating list, payer name, number of lunchers for points
 // Output: pNode pointer indicating list
-PNODE* updatePoints(PNODE* head, char* payerName, unsigned char num_lunchers)
+PNODE* updatePoints(PNODE* head, char* payerName, unsigned char numLunchers)
 {
 	PNODE* cur = head;
 	while(cur)
 	{
 		if(strcmp(cur->name, payerName) == 0)
 		{
-			cur->points += num_lunchers - 1;
+			cur->points += numLunchers - 1;
 		}
 		else
 		{
@@ -243,61 +243,61 @@ PNODE* updatePoints(PNODE* head, char* payerName, unsigned char num_lunchers)
 // Sort List alphabetically by participant name
 // Input: pNode pointer indicating list of participants
 // Output: pNode pointer indicating sorted list of participants
-PNODE* sort_list(PNODE* head)
+PNODE* sortList(PNODE* head)
 {
 	// algorithm: pull head node and sort one by one. return sorted head
-	PNODE* cur_head = head;
-	PNODE* sorted_head = NULL;
-	PNODE* sort_cand = NULL;
+	PNODE* curHead = head;
+	PNODE* sortedHead = NULL;
+	PNODE* sortCand = NULL;
 
 	// for entire list
-	while(cur_head)
+	while(curHead)
 	{
-		sort_cand = cur_head;
+		sortCand = curHead;
 		#ifdef DEBUG
-		printf("sort_cand = %s\n", sort_cand->name);
+		printf("sortCand = %s\n", sortCand->name);
 		#endif
-		cur_head = cur_head->next;
+		curHead = curHead->next;
 
-		if(!sorted_head)
+		if(!sortedHead)
 		{
 			// essentially create sorted head
-			sorted_head = sort_cand;
-			sorted_head->next = NULL;
+			sortedHead = sortCand;
+			sortedHead->next = NULL;
 		}
-		else if(strcmp(sort_cand->name, sorted_head->name) < 0)
+		else if(strcmp(sortCand->name, sortedHead->name) < 0)
 		{
 			// candidate should go before current head
-			sort_cand->next = sorted_head;
-			sorted_head = sort_cand;
+			sortCand->next = sortedHead;
+			sortedHead = sortCand;
 		}
 		else
 		{
-			// search to the right to find right place for sort_cand
-			PNODE* cur_sorted = sorted_head;
-			char* cand_name = sort_cand->name;
+			// search to the right to find right place for sortCand
+			PNODE* curSorted = sortedHead;
+			char* candName = sortCand->name;
 
-			while(cur_sorted->next && strcmp(cur_sorted->next->name, cand_name) < 0)
+			while(curSorted->next && strcmp(curSorted->next->name, candName) < 0)
 			{
-				cur_sorted = cur_sorted->next;
+				curSorted = curSorted->next;
 			}
 
-			sort_cand->next = cur_sorted->next;
-			cur_sorted->next = sort_cand;
+			sortCand->next = curSorted->next;
+			curSorted->next = sortCand;
 		}
 	}
 
-	return sorted_head;
+	return sortedHead;
 }
 
 // Free all nodes at the end of the sim
 // Input: pNode pointer indicating list of participants
 // Output: none
-void free_all(PNODE* head)
+void freeAll(PNODE* head)
 {
 	if(head)
 	{
-		free_all(head->next);
+		freeAll(head->next);
 		free(head);
 	}
 	else

@@ -24,7 +24,7 @@ void printHelp()
 	return;
 }
 
-void print_cmd_help()
+void printCmdHelp()
 {
 	printf("Following commands and operations are available:\n");
 	printf("\tadd <participant> - Adds particpant of name 'participant' to luncher pool.\n");
@@ -43,14 +43,14 @@ int main(int argc, char** argv)
 
 	int opt;
 	PNODE* parList = NULL;
-	int option_index = 0;
+	int optionIndex = 0;
 
-	unsigned char num_lunches = 5;
-	char* output_file = "";
+	unsigned char numLunches = 5;
+	char* outputFile = "";
 	double offset = 0.00;
 
 	// process options
-	static struct option long_options[] = {
+	static struct option longOptions[] = {
 		{"lunches",	required_argument,	0,	'l'	},
 		{"output",	required_argument,	0,	'o'	},
 		{"offset",	required_argument,	0,	'f'	},
@@ -58,27 +58,27 @@ int main(int argc, char** argv)
 		{0,		0,			0,	0	}
 	};
 
-	while((opt = getopt_long(argc, argv, "l:o:f:h", long_options, &option_index)) != -1)
+	while((opt = getopt_long(argc, argv, "l:o:f:h", longOptions, &optionIndex)) != -1)
 	{
 		switch(opt)
 		{
 			case 'l':
 				if(optarg)
 				{
-					num_lunches = atoi(optarg);
-					assert(num_lunches > 0);
+					numLunches = atoi(optarg);
+					assert(numLunches > 0);
 				}
 				#ifdef DEBUG
-				printf("option l - %d\n", num_lunches);
+				printf("option l - %d\n", numLunches);
 				#endif
 				break;
 			case 'o':
 				if(optarg)
 				{
-					output_file = optarg;
+					outputFile = optarg;
 				}
 				#ifdef DEBUG
-				printf("option o - %s\n", output_file);
+				printf("option o - %s\n", outputFile);
 				#endif
 				break;
 			case 'f':
@@ -102,14 +102,6 @@ int main(int argc, char** argv)
 				break;
 		}
 	}
-
-	// TODO: Transfer this to a command line type structure. Commands like
-	//       add <participant name> 1
-	//       del <participant name> ? 2
-	//       show 1
-	//       run 1
-	//       quit 2
-	//       help 3
 
 	// decide what to do
 	while(1)
@@ -135,8 +127,8 @@ int main(int argc, char** argv)
 
 		if(strcmp(command, "add") == 0) // add a participant
 		{
-			char* command_arg = strtok(NULL, " \n");
-			if(!command_arg)
+			char* commandArg = strtok(NULL, " \n");
+			if(!commandArg)
 			{
 				printf("Need argument: Participant name\n");
 				continue;
@@ -148,27 +140,27 @@ int main(int argc, char** argv)
 				continue;
 			}
 
-			printf("Adding %s\n", command_arg);
-			parList = addParticipant(parList, command_arg, offset);
+			printf("Adding %s\n", commandArg);
+			parList = addParticipant(parList, commandArg, offset);
 		}
 		else if(strcmp(command, "show") == 0) // check status through printing
 		{
-			parList = sort_list(parList);
+			parList = sortList(parList);
 			printList(parList);
 		}
 		else if(strcmp(command, "run") == 0) // run simulation
 		{
-			run_simulation(parList, num_lunches, output_file);
+			runSimulation(parList, numLunches, outputFile);
 			break;
 		}
 		else if(strcmp(command, "exit") == 0)
 		{
-			free_all(parList);
+			freeAll(parList);
 			return 0;
 		}
 		else if(strcmp(command, "help") == 0)
 		{
-			print_cmd_help();
+			printCmdHelp();
 		}
 		else // all other options. throw error.
 		{
