@@ -150,6 +150,8 @@ int main(int argc, char** argv)
 		}
 		else if(strcmp(command, "run") == 0) // run simulation
 		{
+			// TODO: specify file to write in command. > run foo will output foo_prices.csv, foo_points.csv, foo_payer.csv
+			// TODO: run no longer breaks. resets instead. run, reinitialize for subsequent run.
 			runSimulation(parList, numLunches, outputFile);
 			break;
 		}
