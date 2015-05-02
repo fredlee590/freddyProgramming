@@ -24,6 +24,16 @@ void printHelp()
 	return;
 }
 
+void print_cmd_help()
+{
+	printf("Following commands and operations are available:\n");
+	printf("\tadd <participant> - Adds particpant of name 'participant' to luncher pool.\n");
+	printf("\tshow - Shows current state of luncher pool.\n");
+	printf("\trun - Run the simulation and exit (for now).\n");
+	printf("\texit - Exits this simulation.\n");
+	printf("\thelp - Print this help. Congratulations, you found it!\n");
+}
+
 // main function to process options and decide what to do
 int main(int argc, char** argv)
 {
@@ -156,9 +166,14 @@ int main(int argc, char** argv)
 			free_all(parList);
 			return 0;
 		}
+		else if(strcmp(command, "help") == 0)
+		{
+			print_cmd_help();
+		}
 		else // all other options. throw error.
 		{
 			printf("Unknown option. Try again.\n");
+			printf("Enter help to get more info of available options.\n");
 		}
 	}
 	return 0; // exit
