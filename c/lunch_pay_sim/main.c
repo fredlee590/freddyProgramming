@@ -156,7 +156,7 @@ int main(int argc, char** argv)
 		else if(strcmp(command, "exit") == 0)
 		{
 			freeAll(parList);
-			return 0;
+			break;
 		}
 		else if(strcmp(command, "help") == 0)
 		{
