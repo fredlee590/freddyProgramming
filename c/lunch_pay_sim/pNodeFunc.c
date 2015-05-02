@@ -51,7 +51,7 @@ PNODE* addParticipant(PNODE* head, char* parName, double offset)
 
 		// get to the end
 		PNODE* current = head;
-		while(current->next != NULL)
+		while(current->next)
 		{
 			current = current->next;
 		}
@@ -69,7 +69,7 @@ PNODE* addParticipant(PNODE* head, char* parName, double offset)
 // Output: number indicating how long the node is
 unsigned char get_length(PNODE* head)
 {
-	if(head == NULL)
+	if(!head)
 	{
 		return 0;
 	}
@@ -78,7 +78,7 @@ unsigned char get_length(PNODE* head)
 		unsigned char count = 0;
 		// traverse list and count
 		PNODE* current = head;
-		while(current != NULL)
+		while(current)
 		{
 			count++;
 			current = current->next;
@@ -101,7 +101,7 @@ PNODE* join_lists(PNODE* head1, PNODE* head2)
 		// get to end of first list
 		PNODE* current = head1;
 
-		while(current->next != NULL)
+		while(current->next)
 		{
 			current = current->next;
 		}

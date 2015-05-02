@@ -94,7 +94,7 @@ void run_simulation(PNODE* head, unsigned char num_lunches, char* output_file_na
 
 		// for each luncher for this lunch
 		PNODE* cur_luncher = lunchers;
-		while(cur_luncher != NULL)
+		while(cur_luncher)
 		{
 			double lunchPrice = ((rand() % PRICE_RANGE) / 100.0) + BASE_PRICE + cur_luncher->offset;
 
