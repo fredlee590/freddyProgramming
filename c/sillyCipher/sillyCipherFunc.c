@@ -15,14 +15,13 @@
 #define MINCHAR ' '
 #define RANGE (MAXCHAR - MINCHAR + 1)
 
-char* sillyXcrypt(char* keyword, char* toXcrypt, char initialDir, char* file_to_read)
+char* sillyXcrypt(char* keyword, char* toXcrypt, char direction, char* file_to_read)
 {
 	int i;
 	MD5_CTX c;
 	unsigned char out[MD5_DIGEST_LENGTH];
 
 	// set up defaults
-	char sign = initialDir;
 	char* result = malloc(sizeof(char) * strlen(toXcrypt));
 
 	// compute md5sum of keyword
@@ -40,7 +39,18 @@ char* sillyXcrypt(char* keyword, char* toXcrypt, char initialDir, char* file_to_
 	for(i = 0; i < toXcrypt_len; i++)
 	{
 		// compute offset from md5sum part
-		unsigned char offset = out[i % MD5_DIGEST_LENGTH] & 0xF;
+		char sign;
+		unsigned val = out[i % MD5_DIGEST_LENGTH];
+		unsigned char offset = val & 0x1F;
+		//if((val & 0x80) ^ (val & 0x40))
+		if(val & 0x20)
+		{
+			sign = direction;
+		}
+		else
+		{
+			sign = -direction;
+		}
 
 		#ifdef DEBUG
 		printf("newChar = %c + (%d * %d)\n", result[i], sign, offset);
@@ -93,8 +103,6 @@ char* sillyXcrypt(char* keyword, char* toXcrypt, char initialDir, char* file_to_
 			i--;
 			continue;
 		}
-
-		sign *= -1;
 	}
 
 	return result;
