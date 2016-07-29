@@ -32,8 +32,14 @@ func main() {
 
 	// validate command
 	switch command {
+	case "print-raw":
+		fmt.Println("Printing raw file.")
+		PrintRaw(fileName)
 	case "print":
-		fmt.Println("Printing file")
+		fmt.Println("Printing file with color markers parsed out.")
+	case "print-color":
+		fmt.Println("Printing file with color applied.")
+		PrintWithColor(fileName)
 	default:
 		fmt.Println("Unknown command")
 		os.Exit(3)
