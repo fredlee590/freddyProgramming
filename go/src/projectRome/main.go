@@ -37,9 +37,17 @@ func main() {
 		PrintRaw(fileName)
 	case "print":
 		fmt.Println("Printing file with color markers parsed out.")
+		PrintStripped(fileName)
 	case "print-color":
 		fmt.Println("Printing file with color applied.")
 		PrintWithColor(fileName)
+	case "analyze-count":
+		fmt.Println("Counting numerical patterns")
+		// TODO: make these options. For now change manually and recompile
+		if err := AnalyzeCount(fileName, 130, 0); err != nil {
+			fmt.Println("Failed to count common patterns")
+			fmt.Println(err)
+		}
 	default:
 		fmt.Println("Unknown command")
 		os.Exit(3)

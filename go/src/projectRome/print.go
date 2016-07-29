@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"strings"
 )
 
@@ -28,6 +27,16 @@ func PrintRaw(fileName string) {
 	}
 }
 
+func PrintStripped(fileName string) {
+	rawStr, err := getFileString(fileName)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		strippedStr := stripString(rawStr)
+		fmt.Println(strippedStr)
+	}
+}
+
 func PrintWithColor(fileName string) {
 	rawStr, err := getFileString(fileName)
 	if err != nil {
@@ -36,16 +45,6 @@ func PrintWithColor(fileName string) {
 		colorStr := colorizeString(rawStr)
 		fmt.Println(colorStr)
 	}
-}
-
-func getFileString(fileName string) (string, error) {
-	contents, err := ioutil.ReadFile(fileName)
-	if err != nil {
-		fmt.Printf("[ERROR] Failed to read file: %s\n", err)
-		return "", err
-	}
-
-	return string(contents), nil
 }
 
 func colorizeString(str string) string {
