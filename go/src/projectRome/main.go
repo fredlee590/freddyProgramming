@@ -41,6 +41,15 @@ func main() {
 	case "print-color":
 		fmt.Println("Printing file with color applied.")
 		PrintWithColor(fileName)
+	case "print-cyan":
+		fmt.Println("Printing only cyan characters.")
+		PrintChars(fileName, "cyan")
+	case "print-blue":
+		fmt.Println("Printing only blue characters.")
+		PrintChars(fileName, "blue")
+	case "print-red":
+		fmt.Println("Printing only red characters.")
+		PrintChars(fileName, "red")
 	case "analyze-count":
 		fmt.Println("Counting numerical patterns")
 		// TODO: make these options. For now change manually and recompile

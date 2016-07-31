@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"regexp"
 	"strings"
 )
 
@@ -44,6 +45,43 @@ func PrintWithColor(fileName string) {
 	} else {
 		colorStr := colorizeString(rawStr)
 		fmt.Println(colorStr)
+	}
+}
+
+func PrintChars(fileName, color string) {
+	rawStr, err := getFileString(fileName)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		var startChar string
+		var endChar string
+		oneLineStr := strings.Replace(rawStr, "\n", "", -1)
+		switch color {
+		case "blue":
+			startChar = BLUE_START_CHAR
+			endChar = BLUE_END_CHAR
+		case "cyan":
+			startChar = CYAN_START_CHAR
+			endChar = CYAN_END_CHAR
+		case "red":
+			startChar = RED_START_CHAR
+			endChar = RED_END_CHAR
+		default:
+			fmt.Println("Unknown color")
+			return
+		}
+
+		oneLineStr = strings.Replace(oneLineStr, fmt.Sprintf("%s%s", endChar, startChar), "", -1)
+
+		re := regexp.MustCompile(fmt.Sprintf("\\%s[0-9a-z]+\\%s", startChar, endChar))
+		colorChars := re.FindAllString(oneLineStr, -1)
+		for _, c := range colorChars {
+			ch := strings.Replace(c, startChar, "", -1)
+			ch = strings.Replace(ch, endChar, "", -1)
+			fmt.Printf("%s ", ch)
+		}
+
+		fmt.Println()
 	}
 }
 
