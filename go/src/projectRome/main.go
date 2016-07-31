@@ -37,10 +37,16 @@ func main() {
 		PrintRaw(fileName)
 	case "print":
 		fmt.Println("Printing file with color markers parsed out.")
-		PrintStripped(fileName)
+		PrintStripped(fileName, false)
+	case "print-oneline":
+		fmt.Println("Printing file with color markers parsed out. One line.")
+		PrintStripped(fileName, true)
 	case "print-color":
 		fmt.Println("Printing file with color applied.")
-		PrintWithColor(fileName)
+		PrintWithColor(fileName, false)
+	case "print-oneline-color":
+		fmt.Println("Printing file with color markers parsed out. One line.")
+		PrintWithColor(fileName, true)
 	case "print-cyan":
 		fmt.Println("Printing only cyan characters.")
 		PrintChars(fileName, "cyan")

@@ -28,22 +28,28 @@ func PrintRaw(fileName string) {
 	}
 }
 
-func PrintStripped(fileName string) {
+func PrintStripped(fileName string, oneline bool) {
 	rawStr, err := getFileString(fileName)
 	if err != nil {
 		fmt.Println(err)
 	} else {
 		strippedStr := stripString(rawStr)
+		if oneline {
+			strippedStr = strings.Replace(strippedStr, "\n", "", -1)
+		}
 		fmt.Println(strippedStr)
 	}
 }
 
-func PrintWithColor(fileName string) {
+func PrintWithColor(fileName string, oneline bool) {
 	rawStr, err := getFileString(fileName)
 	if err != nil {
 		fmt.Println(err)
 	} else {
 		colorStr := colorizeString(rawStr)
+		if oneline {
+			colorStr = strings.Replace(colorStr, "\n", "", -1)
+		}
 		fmt.Println(colorStr)
 	}
 }
