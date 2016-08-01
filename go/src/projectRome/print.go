@@ -87,12 +87,19 @@ func PrintChars(fileName, color string) {
 
 		re := regexp.MustCompile(fmt.Sprintf("\\%s[0-9a-z]+\\%s", startChar, endChar))
 		colorChars := re.FindAllString(oneLineStr, -1)
+		allChars := ""
 		for _, c := range colorChars {
 			ch := strings.Replace(c, startChar, "", -1)
 			ch = strings.Replace(ch, endChar, "", -1)
-			fmt.Printf("%s ", ch)
+			allChars += ch
 		}
 
+		for i, c := range allChars {
+			fmt.Printf("%c", c)
+			if i % 3 == 2 {
+				fmt.Printf(" ")
+			}
+		}
 		fmt.Println()
 	}
 }
