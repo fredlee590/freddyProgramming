@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"regexp"
 	"strings"
+	"strconv"
 )
 
 const CLR = "\x1B[0m"
@@ -94,12 +95,18 @@ func PrintChars(fileName, color string) {
 			allChars += ch
 		}
 
+		fmt.Println(allChars)
+
+		curChar := ""
 		for i, c := range allChars {
-			fmt.Printf("%c", c)
+			curChar += fmt.Sprintf("%c", c)
 			if i % 3 == 2 {
-				fmt.Printf(" ")
+				curInt, _ := strconv.Atoi(curChar)
+				fmt.Printf("%c", curInt)
+				curChar = ""
 			}
 		}
+
 		fmt.Println()
 	}
 }
