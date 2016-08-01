@@ -50,6 +50,9 @@ func main() {
 	case "print-cyan":
 		fmt.Println("Printing only cyan characters.")
 		PrintChars(fileName, "cyan")
+	case "print-yellow":
+		fmt.Println("Printing only yellow characters.")
+		PrintChars(fileName, "yellow")
 	case "print-blue":
 		fmt.Println("Printing only blue characters.")
 		PrintChars(fileName, "blue")

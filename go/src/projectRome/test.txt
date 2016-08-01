@@ -1,3 +1,3 @@
-(a){b}c<d>
+(a){b}+c-<d>
 
-Four {score} and <seven> years ago, (I knew) what the {hell} that meant.
+Four {score} +and- <seven> years ago, (I knew) what the {hell} that meant.

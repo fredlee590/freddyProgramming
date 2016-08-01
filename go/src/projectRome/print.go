@@ -10,14 +10,17 @@ const CLR = "\x1B[0m"
 const RED = "\x1B[31;1m"
 const BLUE = "\x1B[34;1m"
 const CYAN = "\x1B[36;1m"
+const YELLOW = "\x1B[33;1m"
 
 const RED_START_CHAR = "{"
 const BLUE_START_CHAR = "<"
 const CYAN_START_CHAR = "("
+const YELLOW_START_CHAR = "+"
 
 const RED_END_CHAR = "}"
 const BLUE_END_CHAR = ">"
 const CYAN_END_CHAR = ")"
+const YELLOW_END_CHAR = "-"
 
 func PrintRaw(fileName string) {
 	rawStr, err := getFileString(fileName)
@@ -69,6 +72,9 @@ func PrintChars(fileName, color string) {
 		case "cyan":
 			startChar = CYAN_START_CHAR
 			endChar = CYAN_END_CHAR
+		case "yellow":
+			startChar = YELLOW_START_CHAR
+			endChar = YELLOW_END_CHAR
 		case "red":
 			startChar = RED_START_CHAR
 			endChar = RED_END_CHAR
@@ -107,6 +113,10 @@ func colorizeString(str string) string {
 	colorStr = strings.Replace(colorStr, CYAN_START_CHAR, CYAN, -1)
 	//fmt.Println(colorStr)
 	colorStr = strings.Replace(colorStr, CYAN_END_CHAR, CLR, -1)
+	//fmt.Println(colorStr)
+	colorStr = strings.Replace(colorStr, YELLOW_START_CHAR, YELLOW, -1)
+	//fmt.Println(colorStr)
+	colorStr = strings.Replace(colorStr, YELLOW_END_CHAR, CLR, -1)
 	//fmt.Println(colorStr)
 
 	return colorStr
