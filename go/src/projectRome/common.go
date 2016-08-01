@@ -22,9 +22,11 @@ func stripString(str string) string {
 	strippedStr = strings.Replace(strippedStr, RED_START_CHAR, "", -1)
 	strippedStr = strings.Replace(strippedStr, BLUE_START_CHAR, "", -1)
 	strippedStr = strings.Replace(strippedStr, CYAN_START_CHAR, "", -1)
+	strippedStr = strings.Replace(strippedStr, YELLOW_START_CHAR, "", -1)
 	strippedStr = strings.Replace(strippedStr, RED_END_CHAR, "", -1)
 	strippedStr = strings.Replace(strippedStr, BLUE_END_CHAR, "", -1)
 	strippedStr = strings.Replace(strippedStr, CYAN_END_CHAR, "", -1)
+	strippedStr = strings.Replace(strippedStr, YELLOW_END_CHAR, "", -1)
 
 	return strippedStr
 }

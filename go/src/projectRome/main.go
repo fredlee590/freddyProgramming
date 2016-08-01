@@ -8,8 +8,17 @@ import (
 func main() {
 	if len(os.Args) != 3 {
 		fmt.Println("Need exactly two arguments: to describe file name")
-		fmt.Println("1) File name of cipher text")
-		fmt.Println("2) Command to execute")
+		fmt.Println("1) File name of cipher text. NOTE: This file needs the color delimiters!")
+		fmt.Println("2) Command to execute. Options are")
+		fmt.Println("   print")
+		fmt.Println("   print-raw")
+		fmt.Println("   print-oneline")
+		fmt.Println("   print-color")
+		fmt.Println("   print-red")
+		fmt.Println("   print-yellow")
+		fmt.Println("   print-blue")
+		fmt.Println("   print-cyan")
+		fmt.Println("   analyze-count")
 		fmt.Println("Exiting!")
 		os.Exit(1)
 	}
