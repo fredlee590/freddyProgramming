@@ -58,6 +58,39 @@ func PrintWithColor(fileName string, oneline bool) {
 	}
 }
 
+func colorizeString(str string) string {
+	colorStr := str
+
+	//fmt.Println(colorStr) // debugging print statements along the way
+
+	colorStr = strings.Replace(colorStr, RED_START_CHAR, RED, -1)
+	//fmt.Println(colorStr)
+	colorStr = strings.Replace(colorStr, RED_END_CHAR, CLR, -1)
+	//fmt.Println(colorStr)
+	colorStr = strings.Replace(colorStr, BLUE_START_CHAR, BLUE, -1)
+	//fmt.Println(colorStr)
+	colorStr = strings.Replace(colorStr, BLUE_END_CHAR, CLR, -1)
+	//fmt.Println(colorStr)
+	colorStr = strings.Replace(colorStr, CYAN_START_CHAR, CYAN, -1)
+	//fmt.Println(colorStr)
+	colorStr = strings.Replace(colorStr, CYAN_END_CHAR, CLR, -1)
+	//fmt.Println(colorStr)
+	colorStr = strings.Replace(colorStr, YELLOW_START_CHAR, YELLOW, -1)
+	//fmt.Println(colorStr)
+	colorStr = strings.Replace(colorStr, YELLOW_END_CHAR, CLR, -1)
+	//fmt.Println(colorStr)
+
+	return colorStr
+}
+
+func convToLetter(val int) string {
+	if val >= ' ' && val <= '~' {
+		return fmt.Sprintf("%c", val)
+	} else {
+		return "_"
+	}
+}
+
 func PrintChars(fileName, color string) {
 	rawStr, err := getFileString(fileName)
 	if err != nil {
@@ -98,40 +131,23 @@ func PrintChars(fileName, color string) {
 		fmt.Println(allChars)
 
 		curChar := ""
+		orig := ""
+		plus := ""
+		minus := ""
 		for i, c := range allChars {
 			curChar += fmt.Sprintf("%c", c)
 			if i % 3 == 2 {
 				curInt, _ := strconv.Atoi(curChar)
-				fmt.Printf("%c", curInt)
+				orig += convToLetter(curInt)
+				plus += convToLetter(curInt + 13)
+				minus += convToLetter(curInt - 13)
 				curChar = ""
 			}
 		}
 
-		fmt.Println()
+		fmt.Println(orig)
+		fmt.Println(plus)
+		fmt.Println(minus)
 	}
 }
 
-func colorizeString(str string) string {
-	colorStr := str
-
-	//fmt.Println(colorStr) // debugging print statements along the way
-
-	colorStr = strings.Replace(colorStr, RED_START_CHAR, RED, -1)
-	//fmt.Println(colorStr)
-	colorStr = strings.Replace(colorStr, RED_END_CHAR, CLR, -1)
-	//fmt.Println(colorStr)
-	colorStr = strings.Replace(colorStr, BLUE_START_CHAR, BLUE, -1)
-	//fmt.Println(colorStr)
-	colorStr = strings.Replace(colorStr, BLUE_END_CHAR, CLR, -1)
-	//fmt.Println(colorStr)
-	colorStr = strings.Replace(colorStr, CYAN_START_CHAR, CYAN, -1)
-	//fmt.Println(colorStr)
-	colorStr = strings.Replace(colorStr, CYAN_END_CHAR, CLR, -1)
-	//fmt.Println(colorStr)
-	colorStr = strings.Replace(colorStr, YELLOW_START_CHAR, YELLOW, -1)
-	//fmt.Println(colorStr)
-	colorStr = strings.Replace(colorStr, YELLOW_END_CHAR, CLR, -1)
-	//fmt.Println(colorStr)
-
-	return colorStr
-}
